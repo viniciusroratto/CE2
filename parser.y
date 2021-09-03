@@ -58,7 +58,7 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: type list;
+decl: type list";";
 list: TK_IDENTIFICADOR "," list; | TK_IDENTIFICADOR;
 type: TK_PR_BOOL | TK_PR_CHAR | TK_PR_FLOAT | TK_PR_INT | TK_PR_STRING | "static" type;
 declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]";
@@ -69,7 +69,7 @@ declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]";
 %%
 
 void yyerror(char const *s){
-    fprintf(stderr, "Syntax error [line:%d]\n", get_line_number());
+    fprintf(stderr, "Erro de Sintaxe [line:%d]\n", get_line_number());
     }
 
 

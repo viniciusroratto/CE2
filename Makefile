@@ -24,7 +24,7 @@ main.o:
 clean:
 	rm etapa1 -f lex.yy.c lex.yy.o main.o
 	
-run: etapa1
+run: etapa2
 	 ./etapa2
 	 
 zip:
