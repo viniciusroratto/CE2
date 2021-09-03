@@ -1,8 +1,6 @@
 %{
 int yylex(void);
 void yyerror (char const *s);
-#include "lex.yy.h"
-
 %}
 
 %token TK_PR_INT
