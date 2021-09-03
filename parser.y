@@ -48,13 +48,31 @@ void yyerror (char const *s);
 %token TK_LIT_STRING
 %token TK_IDENTIFICADOR
 %token TOKEN_ERRO
-
+%start programa
 %%
 
-programa:
+programa: decl
+
+/* Declaracao de variaveis */
+
+decl: type list;
+list: TK_IDENTIFICADOR "," list; | TK_IDENTIFICADOR;
+type: TK_PR_BOOL | TK_PR_CHAR | TK_PR_FLOAT | TK_PR_INT | TK_PR_STRING | "static" type;
+declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]";
+
+
+
 
 %%
 int yyerror(){
     printf(stderr, "Syntax error [line:%d]\n", get_line_number());
     exit(1);
     }
+
+
+
+
+/* Definicao de funcoes */
+
+
+/* Bloco de comandos */
