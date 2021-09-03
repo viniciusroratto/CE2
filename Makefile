@@ -3,8 +3,13 @@
   # disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
-etapa2: lex.yy.o main.o parser.tab.o
+etapa2: parser.tab.o lex.yy.o main.o 
 	gcc lex.yy.o parser.tab.o main.o -o etapa2 -lfl
+
+
+parser.tab.o:
+	bison -d parser.y
+	gcc -c parser.tab.c
 
 lex.yy.o:
 	flex scanner.l
@@ -13,9 +18,7 @@ lex.yy.o:
 main.o:
 	gcc -c main.c
 
-parser.tab.o:
-	bison -d parser.y
-	gcc -c parser.tab.c
+
 
 	
 clean:
