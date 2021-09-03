@@ -62,9 +62,8 @@ declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]";
 
 
 %%
-int yyerror(){
+void yyerror(){
     printf(stderr, "Syntax error [line:%d]\n", get_line_number());
-    exit(1);
     }
 
 
