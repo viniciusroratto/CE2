@@ -60,10 +60,11 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: type list {return "teste";}
+decl: type list {return ("teste");}
     ;
-list: TK_IDENTIFICADOR "," list;
+list: TK_IDENTIFICADOR ',' list;
     | TK_IDENTIFICADOR
+    | ';'
     ;
     
 type: TK_PR_BOOL
@@ -74,7 +75,7 @@ type: TK_PR_BOOL
     | "static" type
     ;
     
-declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]"
+declvetores: type TK_IDENTIFICADOR "[" TK_LIT_INT "]"
     ;
 
 
