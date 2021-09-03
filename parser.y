@@ -58,7 +58,7 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: type list";"; {return "teste"}
+decl: type list";"; {return "teste";}
 list: TK_IDENTIFICADOR "," list; | TK_IDENTIFICADOR;
 type: TK_PR_BOOL | TK_PR_CHAR | TK_PR_FLOAT | TK_PR_INT | TK_PR_STRING | "static" type;
 declvetores: TK_IDENTIFICADOR "[" TK_LIT_INT "]";
