@@ -78,7 +78,7 @@ type: TK_PR_BOOL
     | TK_PR_STATIC type
     ;
     
-declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']'
+declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
 
 lit:
