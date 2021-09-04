@@ -60,11 +60,11 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: type list {printf ("declaração\n");}
+decl: type  TK_IDENTIFICADOR list {printf ("declaração\n");}
     ;
-list: TK_IDENTIFICADOR ',' list ';' ;
-    | TK_IDENTIFICADOR ';'
-    | 
+    
+list: ','  TK_IDENTIFICADOR list {printf ("lista longa\n");}
+    | ';'
     ;
     
 type: TK_PR_BOOL
