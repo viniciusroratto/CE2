@@ -62,6 +62,7 @@ programa: decl
 /* Declaracao de variaveis */
 
 decl: type TK_IDENTIFICADOR lista decl
+    | declvetores
     |
     ;
     
@@ -77,7 +78,7 @@ type: TK_PR_BOOL
     | TK_PR_STATIC type
     ;
     
-declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' {printf ("vetor\n");}
+declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']'
     ;
 
 lit:
