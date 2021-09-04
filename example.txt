@@ -1,0 +1,34 @@
+int a;
+int a,b,c;
+
+float x;
+char a;
+boolean z;  
+
+static int a;
+int vec[1];
+char name[50];
+
+
+
+
+int main() {
+   // printf() displays the string inside quotation
+   printf("Hello, World!");
+   return 0;
+}
+
+int main() {   
+    int number;
+   
+    printf("Enter an integer: ");  
+    
+    // reads and stores input
+    scanf("%d", &number);
+
+    // displays output
+    printf("You entered: %d", number);
+    
+    return 0;
+}
+

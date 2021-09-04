@@ -61,26 +61,35 @@ programa: decl
     ;
     
 decl:
-    varglobal
+    | varglobal
     | declvetores
     | func
+    | decl
     |
     ;
 
-varglobal:    type TK_IDENTIFICADOR lista decl
-    
-lista: ','  TK_IDENTIFICADOR lista
-    | ';'
+varglobal:
+    static type TK_IDENTIFICADOR lista
+
+static:
+    TK_PR_STATIC
+    |
     ;
     
-type: TK_PR_BOOL
+type:
+    TK_PR_BOOL
     | TK_PR_CHAR
     | TK_PR_FLOAT
     | TK_PR_INT
     | TK_PR_STRING
-    | TK_PR_STATIC type
+    ;
+        
+lista:
+    ','  TK_IDENTIFICADOR lista
+    | ';'
     ;
     
+
 declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
 
@@ -95,10 +104,7 @@ lit:
 	
 /* Definicao de funcoes */
 /*
- O
-cabec¸alho consiste no tipo do valor de retorno, que nao pode ˜
-ser vetor, seguido pelo nome da func¸ao e terminado por uma ˜
-lista. O tipo pode estar precedido opcionalmente pela palavra reservada static. A lista e dada entre par ´ enteses ˆ
+A lista e dada entre par ´ enteses ˆ
 e e composta por zero ou mais par ´ ametros de entrada, se- ˆ
 parados por v´ırgula. Cada parametro ˆ e definido pelo seu ´
 tipo e nome, e nao pode ser do tipo vetor. O tipo de um ˜
@@ -112,24 +118,23 @@ func:
 	;
 
 cabecalho:
-    type TK_IDENTIFICADOR '(' lista_parametros ')'
-
-corpo: 
-	'{' bloco_comandos '}'
+    static type TK_IDENTIFICADOR '(' lista_parametros ')'
+    ;
 
 lista_parametros:
-    ',' param_type TK_IDENTIFICADOR lista_parametros
-    | param_type TK_IDENTIFICADOR
+    ',' const type TK_IDENTIFICADOR lista_parametros
+    | const type TK_IDENTIFICADOR
     |
     ;
-    
-param_type: TK_PR_BOOL
-        | TK_PR_CHAR
-        | TK_PR_FLOAT
-        | TK_PR_INT
-        | TK_PR_STRING
-        | TK_PR_CONST type
-        ;
+
+const:
+    TK_PR_CONST
+    |
+    ;
+        
+corpo:
+    '{' bloco_comandos '}'
+    ;
 
 /* Bloco de comandos */
 bloco_comandos:
@@ -164,7 +169,6 @@ expr:
     | TK_IDENTIFICADOR '[' expr ']'
     | '~' expr
     ;
-
 
 %%
 
