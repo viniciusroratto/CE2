@@ -60,7 +60,8 @@ void yyerror (char const *s);
 programa: decl
     ;
     
-decl: varglobal
+decl:
+    varglobal
     | declvetores
     | func
     |
@@ -94,8 +95,7 @@ lit:
 	
 /* Definicao de funcoes */
 /*
-Cada func¸ao˜ e definida por um cabec¸alho e um corpo, sendo ´
-que esta definic¸ao n ˜ ao˜ e terminada por ponto-e-v ´ ´ırgula. O
+ O
 cabec¸alho consiste no tipo do valor de retorno, que nao pode ˜
 ser vetor, seguido pelo nome da func¸ao e terminado por uma ˜
 lista. O tipo pode estar precedido opcionalmente pela palavra reservada static. A lista e dada entre par ´ enteses ˆ
@@ -103,22 +103,33 @@ e e composta por zero ou mais par ´ ametros de entrada, se- ˆ
 parados por v´ırgula. Cada parametro ˆ e definido pelo seu ´
 tipo e nome, e nao pode ser do tipo vetor. O tipo de um ˜
 parametro pode ser opcionalmente precedido da palavra re- ˆ
-servada const. O corpo da func¸ao˜ e um bloco de comandos
+servada const.
  
  */
 
-func: cabecalho corpo 
-	|
+func:
+    cabecalho corpo
 	;
 
-cabecalho:   type TK_IDENTIFICADOR '(' lista_parametros ')'
-	| static type TK_IDENTIFICADOR '(' lista_parametros ')'
+cabecalho:
+    type TK_IDENTIFICADOR '(' lista_parametros ')'
 
 corpo: 
 	'{' bloco_comandos '}'
 
-lista_parametros:  type TK_IDENTIFICADOR 
-	| const type TK_IDENTIFICADOR 
+lista_parametros:
+    ',' param_type TK_IDENTIFICADOR lista_parametros
+    | param_type TK_IDENTIFICADOR
+    |
+    ;
+    
+param_type: TK_PR_BOOL
+        | TK_PR_CHAR
+        | TK_PR_FLOAT
+        | TK_PR_INT
+        | TK_PR_STRING
+        | TK_PR_CONST type
+        ;
 
 /* Bloco de comandos */
 bloco_comandos:
@@ -130,7 +141,7 @@ bloco_comandos:
 comando: 
       TK_IDENTIFICADOR '=' expr ';'
     | TK_IDENTIFICADOR '[' expr ']' '=' expr ';'
-    | TK_PR_RETURN expr 
+    | TK_PR_RETURN expr
     ;
 
 /* Expressoes Aritmeticas e Logicas*/
