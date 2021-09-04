@@ -61,8 +61,7 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: type TK_IDENTIFICADOR lista
-    | decl
+decl: type TK_IDENTIFICADOR lista decl
     |
     ;
     
