@@ -61,12 +61,16 @@ programa: decl
     ;
     
 decl:
-    | type TK_IDENTIFICADOR lista decl
+    | globalvar
     | declvetores
     | func
-    |
+    | decl
     ;
 
+globalvar:
+    type TK_IDENTIFICADOR lista
+    ;
+    
 static:
     TK_PR_STATIC
     |
