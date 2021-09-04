@@ -63,6 +63,7 @@ programa: decl
 
 decl: type TK_IDENTIFICADOR lista
     | decl
+    |
     ;
     
 lista: ','  TK_IDENTIFICADOR lista
