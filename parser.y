@@ -55,16 +55,18 @@ void yyerror (char const *s);
 %start programa
 %%
 
+/* Declaracao de variaveis */
+
 programa: decl
     ;
     
-
-/* Declaracao de variaveis */
-
-decl: type TK_IDENTIFICADOR lista decl
+decl: varglobal
     | declvetores
+    | func
     |
     ;
+
+varglobal:    type TK_IDENTIFICADOR lista decl
     
 lista: ','  TK_IDENTIFICADOR lista
     | ';'
@@ -89,7 +91,68 @@ lit:
     | TK_LIT_CHAR
     | TK_LIT_STRING
     ;
+	
+/* Definicao de funcoes */
+/*
+Cada func¸ao˜ e definida por um cabec¸alho e um corpo, sendo ´
+que esta definic¸ao n ˜ ao˜ e terminada por ponto-e-v ´ ´ırgula. O
+cabec¸alho consiste no tipo do valor de retorno, que nao pode ˜
+ser vetor, seguido pelo nome da func¸ao e terminado por uma ˜
+lista. O tipo pode estar precedido opcionalmente pela palavra reservada static. A lista e dada entre par ´ enteses ˆ
+e e composta por zero ou mais par ´ ametros de entrada, se- ˆ
+parados por v´ırgula. Cada parametro ˆ e definido pelo seu ´
+tipo e nome, e nao pode ser do tipo vetor. O tipo de um ˜
+parametro pode ser opcionalmente precedido da palavra re- ˆ
+servada const. O corpo da func¸ao˜ e um bloco de comandos
+ 
+ */
 
+func: cabecalho corpo 
+	|
+	;
+
+cabecalho:   type TK_IDENTIFICADOR '(' lista_parametros ')'
+	| static type TK_IDENTIFICADOR '(' lista_parametros ')'
+
+corpo: 
+	'{' bloco_comandos '}'
+
+lista_parametros:  type TK_IDENTIFICADOR 
+	| const type TK_IDENTIFICADOR 
+
+/* Bloco de comandos */
+bloco_comandos:
+    comando bloco_comandos
+    |
+    ;
+
+/* Comandos Simples*/
+comando: 
+      TK_IDENTIFICADOR '=' expr ';'
+    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';'
+    | TK_PR_RETURN expr 
+    ;
+
+/* Expressoes Aritmeticas e Logicas*/
+expr:
+    TK_IDENTIFICADOR
+    | lit
+    | expr '+' expr
+    | expr '-' expr
+    | expr '*' expr
+    | expr '/' expr
+    | expr '<' expr
+    | expr '>' expr
+    | expr '|' expr
+    | expr '^' expr
+    | expr '~' expr
+    | expr TK_OC_LE expr
+    | expr TK_OC_GE expr
+    | expr TK_OC_EQ expr
+    | '(' expr ')'
+    | TK_IDENTIFICADOR '[' expr ']'
+    | '~' expr
+    ;
 
 
 %%
@@ -102,7 +165,3 @@ void yyerror(char const *s){
 
 
 
-/* Definicao de funcoes */
-
-
-/* Bloco de comandos */
