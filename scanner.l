@@ -71,7 +71,7 @@ protected                    { return TK_PR_PROTECTED; }
 
  /* Caracteres Especiais */
 
-","                          { return yytext[0]; }
+ ","                         { return yytext[0]; }
 ";"                          { return yytext[0]; }
 ":"                          { return yytext[0]; }
 "("                          { return yytext[0]; }

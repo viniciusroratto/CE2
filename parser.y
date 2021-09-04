@@ -51,6 +51,7 @@ void yyerror (char const *s);
 %token TK_LIT_STRING
 %token TK_IDENTIFICADOR
 %token TOKEN_ERRO
+
 %start programa
 %%
 
@@ -60,7 +61,7 @@ programa: decl
 
 /* Declaracao de variaveis */
 
-decl: | type  TK_IDENTIFICADOR list
+decl: type TK_IDENTIFICADOR list
     ;
     
 list: ','  TK_IDENTIFICADOR list
@@ -72,12 +73,20 @@ type: TK_PR_BOOL
     | TK_PR_FLOAT
     | TK_PR_INT
     | TK_PR_STRING
-    | "static" type
+    | TK_PR_STATIC type
     ;
     
 declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' {printf ("vetor\n");}
     ;
 
+lit:
+    TK_LIT_INT
+    | TK_LIT_FLOAT
+    | TK_LIT_FALSE
+    | TK_LIT_TRUE
+    | TK_LIT_CHAR
+    | TK_LIT_STRING
+    ;
 
 
 
@@ -85,6 +94,7 @@ declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' {printf ("vetor\n");}
 
 void yyerror(char const *s){
     fprintf(stderr, "Erro de Sintaxe [linha:%d]\n", get_line_number());
+    printf("%s\n",s)
     }
 
 
