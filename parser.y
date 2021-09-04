@@ -64,13 +64,11 @@ decl:
     | varglobal
     | declvetores
     | func
-    | decl
-    | ';'
     |
     ;
 
 varglobal:
-    static type TK_IDENTIFICADOR lista ';'
+    static type TK_IDENTIFICADOR lista
     ;
 
 static:
@@ -88,7 +86,7 @@ type:
         
 lista:
     ','  TK_IDENTIFICADOR lista
-    |
+    | ';'
     ;
     
 
