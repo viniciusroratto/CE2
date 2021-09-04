@@ -62,9 +62,9 @@ programa: decl
 
 decl: type list {printf ("declaração\n");}
     ;
-list: TK_IDENTIFICADOR ',' list;
-    | TK_IDENTIFICADOR
-    | ';'
+list: TK_IDENTIFICADOR ',' list ';' ;
+    | TK_IDENTIFICADOR ';'
+    | 
     ;
     
 type: TK_PR_BOOL
@@ -75,7 +75,7 @@ type: TK_PR_BOOL
     | "static" type
     ;
     
-    declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' {printf ("vetor\n");}
+declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' {printf ("vetor\n");}
     ;
 
 
@@ -84,7 +84,7 @@ type: TK_PR_BOOL
 %%
 
 void yyerror(char const *s){
-    fprintf(stderr, "Erro de Sintaxe [line:%d]\n", get_line_number());
+    fprintf(stderr, "Erro de Sintaxe [linha:%d]\n", get_line_number());
     }
 
 
