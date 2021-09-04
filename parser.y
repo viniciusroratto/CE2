@@ -61,14 +61,10 @@ programa: decl
     ;
     
 decl:
-    | varglobal
+    | type TK_IDENTIFICADOR lista decl
     | declvetores
     | func
     |
-    ;
-
-varglobal:
-    static type TK_IDENTIFICADOR lista
     ;
 
 static:
