@@ -68,7 +68,8 @@ decl:
     ;
 
 varglobal:
-    static type TK_IDENTIFICADOR lista
+    static type TK_IDENTIFICADOR lista ';'
+    ;
 
 static:
     TK_PR_STATIC
@@ -85,7 +86,7 @@ type:
         
 lista:
     ','  TK_IDENTIFICADOR lista
-    | ';'
+    |
     ;
     
 
