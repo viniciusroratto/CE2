@@ -64,6 +64,8 @@ decl:
     | varglobal
     | declvetores
     | func
+    | decl
+    | ';'
     |
     ;
 
