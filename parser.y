@@ -94,7 +94,7 @@ lit:
 
 void yyerror(char const *s){
     fprintf(stderr, "Erro de Sintaxe [linha:%d]\n", get_line_number());
-    printf("%s\n",s)
+    printf("%s\n",s);
     }
 
 
