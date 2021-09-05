@@ -128,6 +128,10 @@ corpo:
     '{' bloco_comandos '}'
     ;
 
+    
+    /* FUNCIONAL ATÉ AQUI */
+    
+    
 /* Bloco de comandos */
 bloco_comandos:
     comando bloco_comandos
@@ -140,6 +144,9 @@ comando:
     | TK_IDENTIFICADOR '[' expr ']' '=' expr ';'
     | TK_PR_RETURN expr
     ;
+    
+lista_comandos:
+    ';'
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
