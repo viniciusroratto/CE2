@@ -84,10 +84,6 @@ type:
     | static TK_PR_STRING
     ;
     
-    static:
-    TK_PR_STATIC
-    |
-    ;
         
 lista:
     ','  TK_IDENTIFICADOR lista
@@ -122,9 +118,12 @@ cabecalho:
     type TK_IDENTIFICADOR '(' lista_parametros ')'
     ;
 
+param:
+    const type TK_IDENTIFICADOR lista_parametros
+    ;
+    
 lista_parametros:
     ',' const type TK_IDENTIFICADOR lista_parametros
-    | const type TK_IDENTIFICADOR
     |
     ;
 
