@@ -67,7 +67,7 @@ decl:
 
 globalvar:
     type TK_IDENTIFICADOR lista decl
-    | type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
+    | type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' decl
     ;
     
 
@@ -125,27 +125,18 @@ const:
     ;
         
 corpo:
-    '{' bloco_comandos '}'
+    '{' comando '}'
     ;
-
-    
-    /* FUNCIONAL ATÉ AQUI */
-    
     
 /* Bloco de comandos */
-bloco_comandos:
-    comando bloco_comandos
-    |
-    ;
 
 /* Comandos Simples*/
-comando: 
-      TK_IDENTIFICADOR '=' expr ';'
-    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';'
+comando:
+      TK_IDENTIFICADOR '=' expr ';' comando
+    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
+    |
     ;
     
-lista_comandos:
-    ';'
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
