@@ -63,7 +63,6 @@ programa: decl
 decl:
     | globalvar
     | func
-    |
     ;
 
 globalvar:
@@ -71,10 +70,7 @@ globalvar:
     | type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
     
-static:
-    TK_PR_STATIC
-    |
-    ;
+
     
 type:
     static TK_PR_BOOL
@@ -83,21 +79,17 @@ type:
     | static TK_PR_INT
     | static TK_PR_STRING
     ;
-    
+
+static:
+    TK_PR_STATIC
+    |
+    ;
         
 lista:
     ','  TK_IDENTIFICADOR lista
     | ';'
     ;
 
-lit:
-    TK_LIT_INT
-    | TK_LIT_FLOAT
-    | TK_LIT_FALSE
-    | TK_LIT_TRUE
-    | TK_LIT_CHAR
-    | TK_LIT_STRING
-    ;
 	
 /* Definicao de funcoes */
 /*
@@ -168,6 +160,16 @@ expr:
     | '(' expr ')'
     | TK_IDENTIFICADOR '[' expr ']'
     | '~' expr
+    ;
+    
+    
+lit:
+    TK_LIT_INT
+    | TK_LIT_FLOAT
+    | TK_LIT_FALSE
+    | TK_LIT_TRUE
+    | TK_LIT_CHAR
+    | TK_LIT_STRING
     ;
 
 %%
