@@ -19,7 +19,7 @@ main.o:
 	gcc -c main.c
 
 report:
-	bison -d parser.y --report-file=report.txt
+	bison -d parser.y --report=all -v
 	
 clean:
 	rm etapa1 -f lex.yy.c lex.yy.o main.o

@@ -171,7 +171,6 @@ fluxo:
     ;
     
 
-    /*    (c) chamada de func ̧a ̃o. As expresso ̃es aritme ́ticas podem ser formadas re- cursivamente com operadores aritme ́ticos, assim como per- mitem o uso de pareˆnteses para forc ̧ar uma associatividade ou precedeˆncia diferente daquela tradicional. A associativi- dade e ́ a` esquerda.*/
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
@@ -192,9 +191,6 @@ expr:
     | expr TK_OC_LE expr
     | expr TK_OC_GE expr
     | expr TK_OC_EQ expr
-    |
-
-    | '~' expr
     ;
     
 lit:
