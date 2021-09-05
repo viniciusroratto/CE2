@@ -115,7 +115,7 @@ func:
 	;
 
 cabecalho:
-    type TK_IDENTIFICADOR '(' lista_parametros ')'
+    type TK_IDENTIFICADOR '(' param ')'
     ;
 
 param:
