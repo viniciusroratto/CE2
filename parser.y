@@ -62,13 +62,13 @@ programa: decl
     
 decl:
     | globalvar
-    | declvetores
     | func
-    | decl
+    |
     ;
 
 globalvar:
-    type TK_IDENTIFICADOR lista
+    type TK_IDENTIFICADOR lista decl
+    | type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
     
 static:
@@ -87,10 +87,6 @@ type:
 lista:
     ','  TK_IDENTIFICADOR lista
     | ';'
-    ;
-    
-
-declvetores: type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
 
 lit:
@@ -114,7 +110,7 @@ servada const.
  */
 
 func:
-    cabecalho corpo
+    cabecalho corpo decl
 	;
 
 cabecalho:
