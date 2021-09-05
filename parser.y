@@ -52,6 +52,19 @@ void yyerror (char const *s);
 %token TK_IDENTIFICADOR
 %token TOKEN_ERRO
 
+%left '|' '^'
+%left '?'
+%left '<' '>' '=' TK_OC_LE TK_OC_GE TK_OC_EQ TK_OC_NE
+%left '+' '-' TK_OC_SL TK_OC_SR
+%left '/'
+%left '%'
+%left '~'
+
+%right '&'
+%right '#'
+%right '*'
+
+
 %start programa
 %%
 
@@ -61,12 +74,11 @@ programa: decl
     ;
     
 decl:
-    | globalvar
+    | varglobal
     | func
-    |
     ;
 
-globalvar:
+varglobal:
     tipo TK_IDENTIFICADOR lista decl
     | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' decl
     ;
@@ -179,18 +191,32 @@ expr:
     | lit_num
     | TK_IDENTIFICADOR '(' expr ')'
     | '(' expr ')'
+    | bool
+    | '+' expr
+    | '-' expr
+    | '!' expr
+    | '&' expr
+    | '*' expr
+    | '?' expr
+    | '#' expr
     | expr '+' expr
     | expr '-' expr
     | expr '*' expr
     | expr '/' expr
+    | expr '%' expr
     | expr '<' expr
     | expr '>' expr
     | expr '|' expr
+    | expr '&' expr
     | expr '^' expr
-    | expr '~' expr
+    | expr TK_OC_OR expr
+    | expr TK_OC_AND expr
     | expr TK_OC_LE expr
     | expr TK_OC_GE expr
     | expr TK_OC_EQ expr
+    | expr TK_OC_NE expr
+    | expr '?' expr ':' expr
+    |
     ;
     
 lit:
@@ -206,7 +232,11 @@ lit_num:
     TK_LIT_INT
     | TK_LIT_FLOAT
     ;
-
+    
+bool:
+    TK_LIT_TRUE
+    | TK_LIT_FALSE
+    ;
 
 %%
 
