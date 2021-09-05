@@ -77,11 +77,16 @@ static:
     ;
     
 type:
-    TK_PR_BOOL
-    | TK_PR_CHAR
-    | TK_PR_FLOAT
-    | TK_PR_INT
-    | TK_PR_STRING
+    static TK_PR_BOOL
+    | static TK_PR_CHAR
+    | static TK_PR_FLOAT
+    | static TK_PR_INT
+    | static TK_PR_STRING
+    ;
+    
+    static:
+    TK_PR_STATIC
+    |
     ;
         
 lista:
@@ -114,7 +119,7 @@ func:
 	;
 
 cabecalho:
-    static type TK_IDENTIFICADOR '(' lista_parametros ')'
+    type TK_IDENTIFICADOR '(' lista_parametros ')'
     ;
 
 lista_parametros:
