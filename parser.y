@@ -142,7 +142,6 @@ bloco_comandos:
 comando: 
       TK_IDENTIFICADOR '=' expr ';'
     | TK_IDENTIFICADOR '[' expr ']' '=' expr ';'
-    | TK_PR_RETURN expr
     ;
     
 lista_comandos:
@@ -152,6 +151,7 @@ lista_comandos:
 expr:
     TK_IDENTIFICADOR
     | lit
+    | TK_PR_RETURN expr
     | expr '+' expr
     | expr '-' expr
     | expr '*' expr
@@ -165,7 +165,7 @@ expr:
     | expr TK_OC_GE expr
     | expr TK_OC_EQ expr
     | '(' expr ')'
-    | TK_IDENTIFICADOR '[' expr ']'
+    | TK_IDENTIFICADOR '(' expr ')'
     | '~' expr
     ;
     
