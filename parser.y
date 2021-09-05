@@ -113,6 +113,7 @@ cabecalho:
 
 param:
     const type TK_IDENTIFICADOR lista_parametros
+    |
     ;
     
 lista_parametros:
