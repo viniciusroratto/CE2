@@ -63,6 +63,7 @@ programa: decl
 decl:
     | globalvar
     | func
+    |
     ;
 
 globalvar:
