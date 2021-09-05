@@ -135,8 +135,6 @@ comando:
     | TK_PR_BREAK ';'comando
     | TK_PR_CONTINUE ';'
     | fluxo comando
-    
-    
     ;
 
 varlocal:
@@ -173,12 +171,15 @@ fluxo:
     ;
     
 
-    
+    /*    (c) chamada de func ̧a ̃o. As expresso ̃es aritme ́ticas podem ser formadas re- cursivamente com operadores aritme ́ticos, assim como per- mitem o uso de pareˆnteses para forc ̧ar uma associatividade ou precedeˆncia diferente daquela tradicional. A associativi- dade e ́ a` esquerda.*/
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
     TK_IDENTIFICADOR
-    | lit
+    | TK_IDENTIFICADOR'['expr']'
+    | lit_num
+    | TK_IDENTIFICADOR '(' expr ')'
+    | '(' expr ')'
     | expr '+' expr
     | expr '-' expr
     | expr '*' expr
@@ -191,11 +192,10 @@ expr:
     | expr TK_OC_LE expr
     | expr TK_OC_GE expr
     | expr TK_OC_EQ expr
-    | '(' expr ')'
-    | TK_IDENTIFICADOR '(' expr ')'
+    |
+
     | '~' expr
     ;
-    
     
 lit:
     TK_LIT_INT
@@ -205,6 +205,12 @@ lit:
     | TK_LIT_CHAR
     | TK_LIT_STRING
     ;
+    
+lit_num:
+    TK_LIT_INT
+    | TK_LIT_FLOAT
+    ;
+
 
 %%
 
