@@ -67,13 +67,13 @@ decl:
     ;
 
 globalvar:
-    type TK_IDENTIFICADOR lista decl
-    | type TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' decl
+    tipo TK_IDENTIFICADOR lista decl
+    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' decl
     ;
     
 
     
-type:
+tipo:
     static TK_PR_BOOL
     | static TK_PR_CHAR
     | static TK_PR_FLOAT
@@ -93,31 +93,22 @@ lista:
 
 	
 /* Definicao de funcoes */
-/*
-A lista e dada entre par ´ enteses ˆ
-e e composta por zero ou mais par ´ ametros de entrada, se- ˆ
-parados por v´ırgula. Cada parametro ˆ e definido pelo seu ´
-tipo e nome, e nao pode ser do tipo vetor. O tipo de um ˜
-parametro pode ser opcionalmente precedido da palavra re- ˆ
-servada const.
- 
- */
 
 func:
     cabecalho corpo decl
 	;
 
 cabecalho:
-    type TK_IDENTIFICADOR '(' param ')'
+    tipo TK_IDENTIFICADOR '(' param ')'
     ;
 
 param:
-    const type TK_IDENTIFICADOR lista_parametros
+    const tipo TK_IDENTIFICADOR lista_parametros
     |
     ;
     
 lista_parametros:
-    ',' const type TK_IDENTIFICADOR lista_parametros
+    ',' const tipo TK_IDENTIFICADOR lista_parametros
     |
     ;
 
@@ -134,17 +125,60 @@ corpo:
 
 /* Comandos Simples*/
 comando:
-      TK_IDENTIFICADOR '=' expr ';' comando
-    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
+    | varlocal
+    | atrib
+    | TK_PR_RETURN expr ';' comando
+    | TK_PR_INPUT TK_IDENTIFICADOR ';' comando
+    | TK_PR_OUTPUT saida ';' comando
+    | shift ';' comando
+    | TK_IDENTIFICADOR'('expr')' ';'
+    | TK_PR_BREAK ';'comando
+    | TK_PR_CONTINUE ';'
+    | fluxo comando
+    
+    
+    ;
+
+varlocal:
+    static const tipo TK_IDENTIFICADOR lista_varlocal ';' comando
+    ;
+    
+    lista_varlocal:
+    ',' TK_IDENTIFICADOR lista_varlocal
     |
     ;
+    
+atrib:
+    | TK_IDENTIFICADOR '=' expr ';' comando
+    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
+    ;
+    
+saida:
+    TK_IDENTIFICADOR
+    | lit
+    ;
+    
+shift:
+    TK_IDENTIFICADOR TK_OC_SR TK_LIT_INT
+    | TK_IDENTIFICADOR'[' expr ']' TK_OC_SR TK_LIT_INT
+    | TK_IDENTIFICADOR TK_OC_SL TK_LIT_INT
+    | TK_IDENTIFICADOR TK_OC_SL TK_LIT_INT
+    
+    
+fluxo:
+    TK_PR_IF '(' expr ')' corpo
+    | TK_PR_IF '(' expr ')' corpo TK_PR_ELSE corpo
+    | TK_PR_FOR '(' atrib ':' expr ':' atrib ')' corpo
+    | TK_PR_WHILE '(' expr ')' corpo
+    ;
+    
+
     
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
     TK_IDENTIFICADOR
     | lit
-    | TK_PR_RETURN expr
     | expr '+' expr
     | expr '-' expr
     | expr '*' expr
@@ -175,7 +209,6 @@ lit:
 %%
 
 void yyerror(char const *s){
-    fprintf(stderr, "Erro de Sintaxe [linha:%d]\n", get_line_number());
     printf("%s\n",s);
     }
 
