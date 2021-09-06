@@ -75,12 +75,11 @@ programa: decl_list
     
 decl_list:
     decl decl_list
-    |
     ;
     
 decl:
-    | varglobal decl
-    | func decl
+    | varglobal
+    | func
     ;
 
 varglobal:
