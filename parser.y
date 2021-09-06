@@ -138,7 +138,7 @@ corpo:
 
 /* Comandos Simples*/
 comando:
-    | varlocal ';' comando
+    varlocal ';' comando
     | TK_IDENTIFICADOR '=' expr ';' comando
     | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
     | TK_PR_RETURN expr ';' comando
@@ -230,6 +230,7 @@ expr:
     | expr TK_OC_EQ expr
     | expr TK_OC_NE expr
     | expr '?' expr ':' expr
+    |
     ;
     
 lit:
