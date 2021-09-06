@@ -150,6 +150,7 @@ comando:
     | TK_PR_CONTINUE ';'
     | fluxo ';' comando
     | corpo ';' comando
+    |
     ;
 
 varlocal:
