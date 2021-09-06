@@ -205,9 +205,6 @@ expr:
     | '(' expr ')'
     | bool
     | '!' expr
-    | '&' expr
-    | '*' expr
-    | '?' expr
     | '#' expr
     | expr '+' expr
     | expr '-' expr
