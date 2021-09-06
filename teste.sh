@@ -5,7 +5,7 @@ SUCCESS=0
 for file in teste_right/*
 do
     echo "TEST FILE $file"
-    cat "$file" | make run --silent
+    cat "$file" | make run
     result=$?
     if [ $result -eq $SUCCESS ]
     then
