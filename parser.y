@@ -147,7 +147,6 @@ comando:
     | TK_PR_BREAK ';'comando
     | TK_PR_CONTINUE ';'
     | fluxo ';' comando
-    |
     ;
 
 varlocal:
