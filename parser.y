@@ -70,16 +70,12 @@ void yyerror (char const *s);
 
 /* Declaracao de variaveis */
 
-programa: decl_list
-    ;
-    
-decl_list:
-    decl decl_list
+programa: decl
     ;
     
 decl:
-    | varglobal
-    | func
+    | varglobal decl
+    | func decl
     ;
 
 varglobal:
@@ -257,5 +253,5 @@ bool:
 
 void yyerror(char const *s){
     
-printf("%s\n",s);
+    printf("%s\n",s);
     }
