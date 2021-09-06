@@ -204,7 +204,12 @@ expr:
     | TK_IDENTIFICADOR '(' expr ')'
     | '(' expr ')'
     | bool
+    | '+' expr
+    | '-' expr
     | '!' expr
+    | '&' expr
+    | '*' expr
+    | '?' expr
     | '#' expr
     | expr '+' expr
     | expr '-' expr
@@ -223,7 +228,6 @@ expr:
     | expr TK_OC_EQ expr
     | expr TK_OC_NE expr
     | expr '?' expr ':' expr
-    |
     ;
     
 lit:
