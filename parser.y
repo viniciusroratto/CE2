@@ -150,10 +150,22 @@ comando:
     ;
 
 varlocal:
-    static const tipo TK_IDENTIFICADOR lista_varlocal ';' comando
+    static const tipo2 TK_IDENTIFICADOR lista_varlocal ';' comando
+    | static const tipo2 TK_IDENTIFICADOR '<=' TK_IDENTIFICADOR ';' comando
+    | static const tipo2 TK_IDENTIFICADOR '<=' lit ';' comando
     ;
     
-    lista_varlocal:
+    
+    
+tipo2:
+    TK_PR_BOOL
+    | TK_PR_CHAR
+    | TK_PR_FLOAT
+    | TK_PR_INT
+    | TK_PR_STRING
+        ;
+    
+lista_varlocal:
     ',' TK_IDENTIFICADOR lista_varlocal
     |
     ;
@@ -241,6 +253,7 @@ bool:
 %%
 
 void yyerror(char const *s){
+    
     printf("%s\n",s);
     }
 
