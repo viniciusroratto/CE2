@@ -137,8 +137,9 @@ corpo:
 
 /* Comandos Simples*/
 comando:
-    | varlocal
-    | atrib
+    | varlocal ';' comando
+    | TK_IDENTIFICADOR '=' expr ';' comando
+    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
     | TK_PR_RETURN expr ';' comando
     | TK_PR_INPUT TK_IDENTIFICADOR ';' comando
     | TK_PR_OUTPUT saida ';' comando
@@ -150,9 +151,9 @@ comando:
     ;
 
 varlocal:
-    static const tipo2 TK_IDENTIFICADOR lista_varlocal ';' comando
-    | static const tipo2 TK_IDENTIFICADOR '<''=' TK_IDENTIFICADOR ';' comando
-    | static const tipo2 TK_IDENTIFICADOR '<''=' lit ';' comando
+    static const tipo2 TK_IDENTIFICADOR lista_varlocal
+    | static const tipo2 TK_IDENTIFICADOR '<''=' TK_IDENTIFICADOR
+    | static const tipo2 TK_IDENTIFICADOR '<''=' lit
     ;
     
     
@@ -163,17 +164,13 @@ tipo2:
     | TK_PR_FLOAT
     | TK_PR_INT
     | TK_PR_STRING
-        ;
+    ;
     
 lista_varlocal:
     ',' TK_IDENTIFICADOR lista_varlocal
     |
     ;
     
-atrib:
-    | TK_IDENTIFICADOR '=' expr ';' comando
-    | TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando
-    ;
     
 saida:
     TK_IDENTIFICADOR
@@ -255,10 +252,5 @@ bool:
 %%
 
 void yyerror(char const *s){
-    
     printf("%s\n",s);
     }
-
-
-
-
