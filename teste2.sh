@@ -7,10 +7,8 @@ do
     
     cat "$file" | make run
     result=$?
-    if [ $result -eq $SUCCESS ]
+    if [ $result -nq $SUCCESS ]
     then
-
-    else
         echo "TEST FILE $file"
     fi
   
