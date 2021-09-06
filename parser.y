@@ -74,8 +74,9 @@ programa: decl
     ;
     
 decl:
-    | varglobal decl
+    varglobal decl
     | func decl
+    |
     ;
 
 varglobal:
