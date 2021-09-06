@@ -74,13 +74,13 @@ programa: decl
     ;
     
 decl:
-    | varglobal
-    | func
+    | varglobal decl
+    | func decl
     ;
 
 varglobal:
-    tipo TK_IDENTIFICADOR lista decl
-    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' decl
+    tipo TK_IDENTIFICADOR lista
+    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
     
 
@@ -107,7 +107,7 @@ lista:
 /* Definicao de funcoes */
 
 func:
-    cabecalho corpo decl
+    cabecalho corpo
 	;
 
 cabecalho:
@@ -146,7 +146,8 @@ comando:
     | TK_IDENTIFICADOR'('expr')' ';'
     | TK_PR_BREAK ';'comando
     | TK_PR_CONTINUE ';'
-    | fluxo comando
+    | fluxo ';' comando
+    |
     ;
 
 varlocal:
@@ -190,11 +191,13 @@ shift:
 fluxo:
     TK_PR_IF '(' expr ')' corpo
     | TK_PR_IF '(' expr ')' corpo TK_PR_ELSE corpo
-    | TK_PR_FOR '(' atrib ':' expr ':' atrib ')' corpo
+    | TK_PR_FOR '(' atrib_for ':' expr ':' atrib_for ')' corpo
     | TK_PR_WHILE '(' expr ')' corpo
     ;
     
-
+atrib_for:
+    TK_IDENTIFICADOR '=' expr
+    ;
 
 /* Expressoes Aritmeticas e Logicas*/
 expr:
