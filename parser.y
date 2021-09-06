@@ -252,6 +252,5 @@ bool:
 %%
 
 void yyerror(char const *s){
-    
-    printf("%s\n",s);
+    fprintf(stderr, "Erro de sintaxe na linha %d \n", get_line_number());
     }
