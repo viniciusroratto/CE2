@@ -3,7 +3,7 @@
   # disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
-etapa2: parser.tab.o lex.yy.o main.o 
+etapa2: lex.yy.o parser.tab.o main.o 
 	gcc lex.yy.o parser.tab.o main.o -o etapa2 -lfl
 
 
