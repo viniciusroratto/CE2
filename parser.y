@@ -66,11 +66,13 @@ void yyerror (char const *s);
 
 
 %start programa
+
 %%
 
 /* Declaracao de variaveis */
 
-programa: decl_list
+programa:
+    decl_list
     ;
 
 decl_list:
