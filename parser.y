@@ -70,7 +70,12 @@ void yyerror (char const *s);
 
 /* Declaracao de variaveis */
 
-programa: decl
+programa: decl_list
+    ;
+    
+decl_list:
+    decl decl_list
+    |
     ;
     
 decl:
