@@ -1,4 +1,6 @@
 # CE2
+
+
 int main() {
   int x;
   x = ?x;
@@ -31,6 +33,26 @@ int f(int a, int b)
   int y;
   f(x, y);
 }
+
+int f()
+{
+  int x;
+  int i;
+  int j;
+  while (i) do { };
+}
+
+int f()
+{
+  v[a+1]=5[10];
+}
+
+
+int f(int a)
+{
+  c[5] = 3 * f(a) + a;
+}
+
 
 
 

@@ -191,7 +191,7 @@ fluxo:
     TK_PR_IF '(' expr ')' corpo
     | TK_PR_IF '(' expr ')' corpo TK_PR_ELSE corpo
     | TK_PR_FOR '(' atrib_for ':' expr ':' atrib_for ')' corpo
-    | TK_PR_WHILE '(' expr ')' corpo
+    | TK_PR_WHILE '(' expr ')' TK_PR_DO corpo
     ;
     
 atrib_for:
