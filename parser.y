@@ -53,7 +53,6 @@ void yyerror (char const *s);
 %token TOKEN_ERRO
 
 %left '|' '^'
-%left '?'
 %left '<' '>' '=' TK_OC_LE TK_OC_GE TK_OC_EQ TK_OC_NE
 %left '+' '-' TK_OC_SL TK_OC_SR
 %left '/'
@@ -63,7 +62,7 @@ void yyerror (char const *s);
 %right '&'
 %right '#'
 %right '*'
-
+%right '?'
 
 %start programa
 %%
