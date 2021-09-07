@@ -203,7 +203,7 @@ expr:
     TK_IDENTIFICADOR
     | TK_IDENTIFICADOR'['expr']'
     | lit_num
-    | TK_IDENTIFICADOR '(' expr_pr ')'
+    | TK_IDENTIFICADOR '(' expr_pr_lst ')'
     | '(' expr ')'
     | bool
     | '+' expr
@@ -233,7 +233,11 @@ expr:
     ;
     
 expr_pr:
-    expr
+    expr expr_pr_lst
+    ;
+
+expr_pr_lst:
+    ',' expr expr_pr_lst
     |
     ;
     

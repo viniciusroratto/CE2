@@ -25,3 +25,12 @@ int f()
   f();
 }
 
+int f(int a, int b)
+{
+  int x;
+  int y;
+  f(x, y);
+}
+
+
+
