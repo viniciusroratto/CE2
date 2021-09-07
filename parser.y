@@ -6,6 +6,7 @@
 
 int yylex(void);
 void yyerror (char const *s);
+void get_line_number();
 %}
 
 %token TK_PR_INT
