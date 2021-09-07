@@ -61,11 +61,9 @@ void yyerror (char const *s);
 %left '~'
 %left "<="
 
-%right ':'
 %right '&'
 %right '#'
 %right '*'
-%right '?'
 
 %nonassoc '?' ':'
 
