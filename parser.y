@@ -2,6 +2,7 @@
     
 #include <stdio.h>
 #include <stdlib.h>
+#include ""
 
 
 int yylex(void);
@@ -65,6 +66,8 @@ void yyerror (char const *s);
 %right '#'
 %right '*'
 %right '?'
+
+%nonassoc '?' ':'
 
 
 %start programa
