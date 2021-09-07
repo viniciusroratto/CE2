@@ -22,12 +22,12 @@ report:
 	bison -d parser.y --report=all -v
 	
 clean:
-	rm etapa1 -f lex.yy.c lex.yy.o main.o
+	rm etapa1 -f lex.yy.c lex.yy.o main.o 
 	
 run: etapa2
 	 ./etapa2
 	 
 zip:
-	tar -cvzf etapa1.tgz scanner.l main.c tokens.h Makefile testes.txt
+	tar -cvzf etapa2.tgz scanner.l main.c parser.y Makefile
 
 

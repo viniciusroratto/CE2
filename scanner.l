@@ -95,6 +95,7 @@ protected                    { return TK_PR_PROTECTED; }
 "^"                          { return yytext[0]; }
 "."                          { return yytext[0]; }
 "$"                          { return yytext[0]; }
+"?"                          { return yytext[0]; }
 
 
 
