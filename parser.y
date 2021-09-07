@@ -58,11 +58,14 @@ void yyerror (char const *s);
 %left '/'
 %left '%'
 %left '~'
+%left "<="
 
+%right ':'
 %right '&'
 %right '#'
 %right '*'
 %right '?'
+
 
 %start programa
 %%
