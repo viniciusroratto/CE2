@@ -2,11 +2,12 @@
     
 #include <stdio.h>
 #include <stdlib.h>
-
+#define YYERROR_VERBOSE 1
 
 int yylex(void);
 void yyerror (char const *s);
 int get_line_number();
+
 %}
 
 %token TK_PR_INT
@@ -64,8 +65,9 @@ int get_line_number();
 %right '&'
 %right '#'
 %right '*'
+%right '?'
 
-%nonassoc '?' ':'
+%nonassoc  ':'
 
 
 %start programa
@@ -265,5 +267,5 @@ bool:
 %%
 
 void yyerror(char const *s){
-    fprintf(stderr, "Erro de sintaxe na linha %d \n", get_line_number());
+    fprintf(stderr, "Erro Encontrado: %s na linha %d \n", s, get_line_number());
     }

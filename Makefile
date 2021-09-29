@@ -1,6 +1,6 @@
   # GRUPO F
-  # Nomes: Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (00160094)
-  # disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
+  # Nomes - Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (00160094)
+  # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
 etapa2: parser.tab.o lex.yy.o main.o 
@@ -8,7 +8,7 @@ etapa2: parser.tab.o lex.yy.o main.o
 
 
 parser.tab.o:
-	bison -d parser.y --report=all
+	bison -d parser.y -Wcounterexamples
 	gcc -c parser.tab.c
 
 lex.yy.o:
@@ -22,7 +22,7 @@ report:
 	bison -d parser.y --report=all -v
 	
 clean:
-	rm etapa1 -f lex.yy.c lex.yy.o main.o 
+	rm etapa2 -f lex.yy.c lex.yy.o main.o 
 	
 run: etapa2
 	 ./etapa2
