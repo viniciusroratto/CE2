@@ -1,3 +1,8 @@
+/*  # GRUPO F
+  # Nomes - Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (160094)
+  # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
+*/
+
 %{
     
 #include <stdio.h>
@@ -7,6 +12,9 @@
 int yylex(void);
 void yyerror (char const *s);
 int get_line_number();
+
+void exporta (void *arvore);
+void libera (void *arvore);
 
 %}
 
@@ -57,6 +65,7 @@ int get_line_number();
 %left '|' '^'
 %left '<' '>' '=' TK_OC_LE TK_OC_GE TK_OC_EQ TK_OC_NE
 %left '+' '-' TK_OC_SL TK_OC_SR
+%left TK_OC_OR TK_OC_AND
 %left '/'
 %left '%'
 %left '~'
@@ -65,7 +74,7 @@ int get_line_number();
 %right '&'
 %right '#'
 %right '*'
-%right '?'
+%right '?' '!'
 
 %nonassoc  ':'
 
@@ -268,4 +277,18 @@ bool:
 
 void yyerror(char const *s){
     fprintf(stderr, "Erro Encontrado: %s na linha %d \n", s, get_line_number());
-    }
+}
+    
+    
+void exporta (void *arvore)
+{
+
+	printf("waiting for function");
+
+}
+void libera (void *arvore)
+{
+
+	printf("waiting for function");
+
+}
