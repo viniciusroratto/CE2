@@ -8,7 +8,7 @@ etapa2: parser.tab.o lex.yy.o main.o
 
 
 parser.tab.o:
-	bison -d parser.y -Wcounterexamples
+	bison -d parser.y 
 	gcc -c parser.tab.c
 
 lex.yy.o:
@@ -19,7 +19,7 @@ main.o:
 	gcc -c main.c
 
 report:
-	bison -d parser.y --report=all -v
+	bison -d parser.y --report=all -Wcounterexamples
 	
 clean:
 	rm etapa2 -f lex.yy.c lex.yy.o main.o 
