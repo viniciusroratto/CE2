@@ -1,4 +1,0 @@
-int f ()
-{
-  class ASL_t [ public int a ];
-}

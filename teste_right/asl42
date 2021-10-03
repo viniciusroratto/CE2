@@ -1,4 +1,0 @@
-int f ()
-{
-  static const int a;
-}

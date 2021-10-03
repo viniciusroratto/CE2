@@ -1,4 +1,0 @@
-int f()
-{
-  for (output x, y : x : x = x+1) { };
-}

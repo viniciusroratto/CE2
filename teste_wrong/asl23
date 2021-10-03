@@ -1,2 +1,0 @@
-class FIRST_t [ public int a ];
-class ASL_t [ public FIRST_t b ];

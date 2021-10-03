@@ -7,14 +7,18 @@
     
 #include <stdio.h>
 #include <stdlib.h>
+#include "AST.h"
 #define YYERROR_VERBOSE 1
 
 int yylex(void);
 void yyerror (char const *s);
 int get_line_number();
 
+
+extern void *arvore;
 void exporta (void *arvore);
 void libera (void *arvore);
+
 
 %}
 
@@ -78,19 +82,24 @@ void libera (void *arvore);
 
 %nonassoc  ':'
 
+%union{
+	struct LexVal *valor_lexico;
+}
 
 %start programa
+
+
 %%
 
 /* Declaracao de variaveis */
 
-programa: decl
+programa: decl {arvore = $$;}
     ;
     
 decl:
-    varglobal decl
-    | func decl
-    |
+    varglobal decl	{$$ = }
+    | func decl 	{$$ = } 
+    | 			{$$ = 0;}
     ;
 
 varglobal:
@@ -110,7 +119,7 @@ tipo:
 
 static:
     TK_PR_STATIC
-    |
+    |	{$$ = 0; }
     ;
         
 lista:
@@ -122,7 +131,7 @@ lista:
 /* Definicao de funcoes */
 
 func:
-    cabecalho corpo
+    cabecalho corpo 
 	;
 
 cabecalho:
@@ -131,17 +140,17 @@ cabecalho:
 
 param:
     const tipo TK_IDENTIFICADOR lista_parametros
-    |
+    | {$$ = 0; }
     ;
     
 lista_parametros:
     ',' const tipo TK_IDENTIFICADOR lista_parametros
-    |
+    | {$$ = 0; }
     ;
 
 const:
     TK_PR_CONST
-    |
+    | {$$ = 0; }
     ;
         
 corpo:
@@ -164,7 +173,7 @@ comando:
     | TK_PR_CONTINUE ';'
     | fluxo ';' comando
     | corpo ';' comando
-    |
+    | {$$ = 0; }
     ;
 
 varlocal:
@@ -185,7 +194,7 @@ tipo2:
     
 lista_varlocal:
     ',' TK_IDENTIFICADOR lista_varlocal
-    |
+    | {$$ = 0; }
     ;
     
     
@@ -199,7 +208,7 @@ shift:
     | TK_IDENTIFICADOR'[' expr ']' TK_OC_SR TK_LIT_INT
     | TK_IDENTIFICADOR TK_OC_SL TK_LIT_INT
     | TK_IDENTIFICADOR'[' expr ']' TK_OC_SL TK_LIT_INT
-    
+    ;
     
 fluxo:
     TK_PR_IF '(' expr ')' corpo
@@ -251,7 +260,7 @@ expr_pr:
 
 expr_pr_lst:
     ',' expr expr_pr_lst
-    |
+    | {$$ = 0; }
     ;
     
 lit:
@@ -280,15 +289,3 @@ void yyerror(char const *s){
 }
     
     
-void exporta (void *arvore)
-{
-
-	printf("waiting for function");
-
-}
-void libera (void *arvore)
-{
-
-	printf("waiting for function");
-
-}
