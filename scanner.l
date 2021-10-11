@@ -6,9 +6,12 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr  */
 %{
 #include "parser.tab.h"
 #include "AST.h"
+#include <stdbool.h>
 
 int linha = 1;
 int get_line_number(void);
+struct LexVal *create_value (char* yytext, int type);
+bool stob (char* yytext);
 
 %}
 
@@ -131,18 +134,16 @@ struct LexVal *create_value (char* yytext, int type){
 	newVal->linha = get_line_number();
 	newVal->tipo = type;
 	
-	switch (int type)
+	switch (type)
 	{
 		case TK_LIT_INT: newVal->val.i = atoi(yytext); 	break;
 		case TK_LIT_FLOAT: newVal->val.f = atof(yytext); 	break;
-		case TK_LIT_CHAR: strdup(newVal->val.c, yytext); 	break; //retirar aspas.
-		case TK_LIT_STRING:strdup(newVal->val.*s, yytext);	break; //retirar aspas.
-		case TK_LIT_TRUE: newVal->val.b = atob(yytext); 	break;
-		case TK_LIT_FALSE: newVal->val.i = atob(yytext); 	break;
-		default: strdup(newVal->val.*s, yytext);
+		case TK_LIT_CHAR: newVal->val.c = *strdup(yytext); 	break; //retirar aspas.
+		case TK_LIT_STRING: newVal->val.s = strdup(yytext);	break; //retirar aspas.
+		case TK_LIT_TRUE: newVal->val.b = true; 	break;
+		case TK_LIT_FALSE: newVal->val.b = false; 	break;
+		default: newVal->val.s = strdup(yytext);
 	}	
 	return newVal;
 
 }
-
-
