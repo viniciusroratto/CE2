@@ -1,16 +1,17 @@
 /* GRUPO F
 Nomes: Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (160094)
-Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr  */
+Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr  
+*/
 
 
 %{
-#include "parser.tab.h"
 #include "AST.h"
+#include "parser.tab.h"
 #include <stdbool.h>
 
 int linha = 1;
 int get_line_number(void);
-struct LexVal *create_value (char* yytext, int type);
+union LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
 
 %}
@@ -125,24 +126,25 @@ int get_line_number(void){
     return linha;
 }
 
-// algo errado aqui!!!
-// Aqui o grupo travou no tratamento de ponteiros.
-struct LexVal *create_value (char* yytext, int type){
 
-	struct LexVal *newVal; 
-	
+
+
+
+union LexVal *create_value (char* yytext, int type){
+
+	union LexVal * newVal;
 	newVal->linha = get_line_number();
 	newVal->tipo = type;
 	
 	switch (type)
 	{
-		case TK_LIT_INT: newVal->val.i = atoi(yytext); 	break;
-		case TK_LIT_FLOAT: newVal->val.f = atof(yytext); 	break;
-		case TK_LIT_CHAR: newVal->val.c = *strdup(yytext); 	break; //retirar aspas.
-		case TK_LIT_STRING: newVal->val.s = strdup(yytext);	break; //retirar aspas.
-		case TK_LIT_TRUE: newVal->val.b = true; 	break;
-		case TK_LIT_FALSE: newVal->val.b = false; 	break;
-		default: newVal->val.s = strdup(yytext);
+		case TK_LIT_INT: newVal->val->i = atoi(yytext); 	break;
+		case TK_LIT_FLOAT: newVal->val->f = atof(yytext); 	break;
+		case TK_LIT_CHAR: newVal->val->c = *strdup(yytext); 	break; //retirar aspas.
+		case TK_LIT_STRING: newVal->val->s = strdup(yytext);	break; //retirar aspas.
+		case TK_LIT_TRUE: newVal->val->b = true; 	break;
+		case TK_LIT_FALSE: newVal->val->b = false; 	break;
+		default: newVal->val->s = strdup(yytext);
 	}	
 	return newVal;
 
