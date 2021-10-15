@@ -39,7 +39,7 @@ Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 		primeiro->sibling = criaIrmao (primeiro->sibling, irmaos, data, n);
 	}
 	return primeiro;
-
+}
 
 Nodo * criaNodo (Nodo * data[], int filhos){
     int n = 0;
@@ -53,8 +53,6 @@ Nodo * criaNodo (Nodo * data[], int filhos){
 	return novo;
 }
 
-
-}
 
 void exporta (void *arvore);
 void libera (void *arvore);
