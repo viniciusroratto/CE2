@@ -4,11 +4,12 @@
 */
 
 %{
-    
+#ifndef PARSER
 #include <stdio.h>
 #include <stdlib.h>
 #include "AST.h"
 #define YYERROR_VERBOSE 1
+
 
 int yylex(void);
 void yyerror (char const *s);
@@ -18,6 +19,7 @@ int get_line_number();
 extern void *arvore;
 void exporta (void *arvore);
 void libera (void *arvore);
+Nodo * criaNodo (Nodo * data[], int filhos);
 
 
 %}
@@ -315,4 +317,4 @@ void yyerror(char const *s){
     fprintf(stderr, "Erro Encontrado: %s na linha %d \n", s, get_line_number());
 }
     
-    
+#endif // PARSER

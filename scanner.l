@@ -5,6 +5,7 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
 %{
+#ifndef SCANNER
 #include "AST.h"
 #include "parser.tab.h"
 #include <stdbool.h>
@@ -149,3 +150,5 @@ union LexVal *create_value (char* yytext, int type){
 	return newVal;
 
 }
+
+#endif // SCANNER
