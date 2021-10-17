@@ -3,7 +3,7 @@
   # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
-etapa3: parser scanner ast main
+etapa3: ast parser scanner  main
 	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
 
 
@@ -23,6 +23,18 @@ main:
 
 report:
 	gcc -d parser.y --report=all -Wcounterexamples 
+	
+test:
+	make clean
+	gcc -c -g AST.h -Wall
+	bison -d parser.y 
+	gcc -c -g parser.tab.c -Wall
+	flex scanner.l
+	gcc -c -g lex.yy.c -Wall
+	gcc -c -g main.c -Wall
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
+	gdb ./etapa3
+	
 	
 clean:
 	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o ast.o

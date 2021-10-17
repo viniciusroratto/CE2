@@ -6,7 +6,6 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 %{
 #ifndef SCANNER
-#include "AST.h"
 #include "parser.tab.h"
 #include <stdbool.h>
 
@@ -128,12 +127,25 @@ int get_line_number(void){
 }
 
 
+typedef union LexVal {
+	int linha;
+	int tipo;
+ 	union Valor *val;
+} LexVal;
 
+typedef union Valor {
+	int i;
+	float f;
+	char c;
+	char* s;
+	bool b;
+} Valor;
 
 
 union LexVal *create_value (char* yytext, int type){
 
-	union LexVal * newVal;
+	union LexVal * newVal = (union LexVal*)calloc(1, sizeof(union LexVal*));
+	newVal->val = (union Valor*)calloc(1, sizeof(union Valor*));
 	newVal->linha = get_line_number();
 	newVal->tipo = type;
 	
@@ -145,8 +157,10 @@ union LexVal *create_value (char* yytext, int type){
 		case TK_LIT_STRING: newVal->val->s = strdup(yytext);	break; //retirar aspas.
 		case TK_LIT_TRUE: newVal->val->b = true; 	break;
 		case TK_LIT_FALSE: newVal->val->b = false; 	break;
-		default: newVal->val->s = strdup(yytext);
-	}	
+		default: 
+			newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
+			newVal->val->s = strdup(yytext);
+			}	
 	return newVal;
 
 }

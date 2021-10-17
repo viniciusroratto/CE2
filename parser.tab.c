@@ -1422,7 +1422,7 @@ yyreduce:
 
   case 3: /* decl: varglobal decl  */
 #line 129 "parser.y"
-                        {(yyval.nodo) = 0;}
+                        { }
 #line 1427 "parser.tab.c"
     break;
 
@@ -1434,492 +1434,480 @@ yyreduce:
 
   case 5: /* decl: %empty  */
 #line 131 "parser.y"
-                        {(yyval.nodo) = 0;}
+      { }
 #line 1439 "parser.tab.c"
-    break;
-
-  case 6: /* varglobal: tipo TK_IDENTIFICADOR lista  */
-#line 135 "parser.y"
-                                {(yyval.nodo) = 0;}
-#line 1445 "parser.tab.c"
-    break;
-
-  case 7: /* varglobal: tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'  */
-#line 136 "parser.y"
-                                                   {(yyval.nodo) = 0;}
-#line 1451 "parser.tab.c"
     break;
 
   case 17: /* func: cabecalho corpo  */
 #line 163 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-1].nodo),(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1457 "parser.tab.c"
+#line 1445 "parser.tab.c"
     break;
 
   case 18: /* cabecalho: tipo TK_IDENTIFICADOR '(' param ')'  */
 #line 167 "parser.y"
                                         {Nodo * data[2] = {(yyvsp[-3].nodo), (yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1463 "parser.tab.c"
+#line 1451 "parser.tab.c"
     break;
 
   case 19: /* param: const tipo TK_IDENTIFICADOR lista_parametros  */
 #line 171 "parser.y"
                                                  {Nodo * data[2] = {(yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1469 "parser.tab.c"
+#line 1457 "parser.tab.c"
     break;
 
   case 20: /* param: %empty  */
 #line 172 "parser.y"
       { }
-#line 1475 "parser.tab.c"
+#line 1463 "parser.tab.c"
     break;
 
   case 21: /* lista_parametros: ',' const tipo TK_IDENTIFICADOR lista_parametros  */
 #line 176 "parser.y"
                                                      {Nodo * data[2] = {(yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1481 "parser.tab.c"
+#line 1469 "parser.tab.c"
     break;
 
   case 22: /* lista_parametros: %empty  */
 #line 177 "parser.y"
       { }
-#line 1487 "parser.tab.c"
+#line 1475 "parser.tab.c"
     break;
 
   case 25: /* corpo: '{' comando '}'  */
 #line 186 "parser.y"
                     {Nodo * data[1] = {(yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data,1);}
-#line 1493 "parser.tab.c"
+#line 1481 "parser.tab.c"
     break;
 
   case 26: /* comando: varlocal ';' comando  */
 #line 193 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1499 "parser.tab.c"
+#line 1487 "parser.tab.c"
     break;
 
   case 27: /* comando: TK_IDENTIFICADOR '=' expr ';' comando  */
 #line 194 "parser.y"
                                             {Nodo * data[3] = {(yyvsp[-4].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1505 "parser.tab.c"
+#line 1493 "parser.tab.c"
     break;
 
   case 28: /* comando: TK_IDENTIFICADOR '[' expr ']' '=' expr ';' comando  */
 #line 195 "parser.y"
                                                          {Nodo * data[4] = {(yyvsp[-7].nodo), (yyvsp[-5].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,4);}
-#line 1511 "parser.tab.c"
+#line 1499 "parser.tab.c"
     break;
 
   case 29: /* comando: TK_PR_RETURN expr ';' comando  */
 #line 196 "parser.y"
                                     {Nodo * data[3] = {(yyvsp[-3].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1517 "parser.tab.c"
+#line 1505 "parser.tab.c"
     break;
 
   case 30: /* comando: TK_PR_INPUT TK_IDENTIFICADOR ';' comando  */
 #line 197 "parser.y"
                                                {Nodo * data[3] = {(yyvsp[-3].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1523 "parser.tab.c"
+#line 1511 "parser.tab.c"
     break;
 
   case 31: /* comando: TK_PR_OUTPUT saida ';' comando  */
 #line 198 "parser.y"
                                      {Nodo * data[3] = {(yyvsp[-3].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1529 "parser.tab.c"
+#line 1517 "parser.tab.c"
     break;
 
   case 32: /* comando: shift ';' comando  */
 #line 199 "parser.y"
                         {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1535 "parser.tab.c"
+#line 1523 "parser.tab.c"
     break;
 
   case 33: /* comando: TK_IDENTIFICADOR '(' expr ')' ';' comando  */
 #line 200 "parser.y"
                                              {Nodo * data[3] = {(yyvsp[-5].nodo), (yyvsp[-3].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1541 "parser.tab.c"
+#line 1529 "parser.tab.c"
     break;
 
   case 34: /* comando: TK_PR_BREAK ';' comando  */
 #line 201 "parser.y"
                              {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1547 "parser.tab.c"
+#line 1535 "parser.tab.c"
     break;
 
   case 35: /* comando: TK_PR_CONTINUE ';'  */
 #line 202 "parser.y"
                         {Nodo * data[1] = {(yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data,1);}
-#line 1553 "parser.tab.c"
+#line 1541 "parser.tab.c"
     break;
 
   case 36: /* comando: fluxo ';' comando  */
 #line 203 "parser.y"
                         {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1559 "parser.tab.c"
+#line 1547 "parser.tab.c"
     break;
 
   case 37: /* comando: corpo ';' comando  */
 #line 204 "parser.y"
                         {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1565 "parser.tab.c"
+#line 1553 "parser.tab.c"
     break;
 
   case 38: /* comando: %empty  */
 #line 205 "parser.y"
       { }
-#line 1571 "parser.tab.c"
+#line 1559 "parser.tab.c"
     break;
 
   case 39: /* varlocal: static const tipo2 TK_IDENTIFICADOR lista_varlocal  */
 #line 209 "parser.y"
                                                        { }
-#line 1577 "parser.tab.c"
+#line 1565 "parser.tab.c"
     break;
 
   case 40: /* varlocal: static const tipo2 TK_IDENTIFICADOR '<' '=' TK_IDENTIFICADOR  */
 #line 210 "parser.y"
                                                                    {Nodo * data[2] = {(yyvsp[-3].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1583 "parser.tab.c"
+#line 1571 "parser.tab.c"
     break;
 
   case 41: /* varlocal: static const tipo2 TK_IDENTIFICADOR '<' '=' lit  */
 #line 211 "parser.y"
                                                       {Nodo * data[2] = {(yyvsp[-3].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
-#line 1589 "parser.tab.c"
+#line 1577 "parser.tab.c"
     break;
 
   case 47: /* lista_varlocal: ',' TK_IDENTIFICADOR lista_varlocal  */
 #line 225 "parser.y"
                                         { }
-#line 1595 "parser.tab.c"
+#line 1583 "parser.tab.c"
     break;
 
   case 48: /* lista_varlocal: %empty  */
 #line 226 "parser.y"
       { }
-#line 1601 "parser.tab.c"
+#line 1589 "parser.tab.c"
     break;
 
   case 49: /* saida: TK_IDENTIFICADOR  */
 #line 231 "parser.y"
                      {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,1);}
-#line 1607 "parser.tab.c"
+#line 1595 "parser.tab.c"
     break;
 
   case 50: /* saida: lit  */
 #line 232 "parser.y"
           {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,1);}
-#line 1613 "parser.tab.c"
+#line 1601 "parser.tab.c"
     break;
 
   case 51: /* shift: TK_IDENTIFICADOR TK_OC_SR TK_LIT_INT  */
 #line 236 "parser.y"
                                          {Nodo * data[3] = {(yyvsp[-2].nodo), (yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1619 "parser.tab.c"
+#line 1607 "parser.tab.c"
     break;
 
   case 52: /* shift: TK_IDENTIFICADOR '[' expr ']' TK_OC_SR TK_LIT_INT  */
 #line 237 "parser.y"
                                                        {Nodo * data[4] = {(yyvsp[-5].nodo), (yyvsp[-3].nodo), (yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,4);}
-#line 1625 "parser.tab.c"
+#line 1613 "parser.tab.c"
     break;
 
   case 53: /* shift: TK_IDENTIFICADOR TK_OC_SL TK_LIT_INT  */
 #line 238 "parser.y"
                                            {Nodo * data[3] = {(yyvsp[-2].nodo), (yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,3);}
-#line 1631 "parser.tab.c"
+#line 1619 "parser.tab.c"
     break;
 
   case 54: /* shift: TK_IDENTIFICADOR '[' expr ']' TK_OC_SL TK_LIT_INT  */
 #line 239 "parser.y"
                                                        {Nodo * data[4] = {(yyvsp[-5].nodo), (yyvsp[-3].nodo), (yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,4);}
-#line 1637 "parser.tab.c"
+#line 1625 "parser.tab.c"
     break;
 
   case 55: /* fluxo: TK_PR_IF '(' expr ')' corpo  */
 #line 243 "parser.y"
                                 {Nodo * data[3] = {(yyvsp[-4].nodo),(yyvsp[-2].nodo),(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 3);}
-#line 1643 "parser.tab.c"
+#line 1631 "parser.tab.c"
     break;
 
   case 56: /* fluxo: TK_PR_IF '(' expr ')' corpo TK_PR_ELSE corpo  */
 #line 244 "parser.y"
                                                    {Nodo * data[5] = {(yyvsp[-6].nodo),(yyvsp[-4].nodo),(yyvsp[-2].nodo), (yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,5);}
-#line 1649 "parser.tab.c"
+#line 1637 "parser.tab.c"
     break;
 
   case 57: /* fluxo: TK_PR_FOR '(' atrib_for ':' expr ':' atrib_for ')' corpo  */
 #line 245 "parser.y"
                                                                {Nodo * data[5] = {(yyvsp[-8].nodo),(yyvsp[-6].nodo),(yyvsp[-4].nodo), (yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 5);}
-#line 1655 "parser.tab.c"
+#line 1643 "parser.tab.c"
     break;
 
   case 58: /* fluxo: TK_PR_WHILE '(' expr ')' TK_PR_DO corpo  */
 #line 246 "parser.y"
                                               {Nodo * data[4] = {(yyvsp[-5].nodo),(yyvsp[-3].nodo),(yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 4);}
-#line 1661 "parser.tab.c"
+#line 1649 "parser.tab.c"
     break;
 
   case 59: /* atrib_for: TK_IDENTIFICADOR '=' expr  */
 #line 250 "parser.y"
                               {Nodo * data[2] = {(yyvsp[-2].nodo),(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1667 "parser.tab.c"
+#line 1655 "parser.tab.c"
     break;
 
   case 60: /* expr: TK_IDENTIFICADOR  */
 #line 255 "parser.y"
                      {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1673 "parser.tab.c"
+#line 1661 "parser.tab.c"
     break;
 
   case 61: /* expr: TK_IDENTIFICADOR '[' expr ']'  */
 #line 256 "parser.y"
                                  {Nodo * data[2] = {(yyvsp[-3].nodo),(yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1679 "parser.tab.c"
+#line 1667 "parser.tab.c"
     break;
 
   case 62: /* expr: lit_num  */
 #line 257 "parser.y"
               {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1685 "parser.tab.c"
+#line 1673 "parser.tab.c"
     break;
 
   case 63: /* expr: TK_IDENTIFICADOR '(' expr_pr ')'  */
 #line 258 "parser.y"
                                        {Nodo * data[2] = {(yyvsp[-3].nodo),(yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1691 "parser.tab.c"
+#line 1679 "parser.tab.c"
     break;
 
   case 64: /* expr: '(' expr ')'  */
 #line 259 "parser.y"
                     {Nodo * data[1] = {(yyvsp[-1].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1697 "parser.tab.c"
+#line 1685 "parser.tab.c"
     break;
 
   case 65: /* expr: bool  */
 #line 260 "parser.y"
            {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1703 "parser.tab.c"
+#line 1691 "parser.tab.c"
     break;
 
   case 66: /* expr: '+' expr  */
 #line 261 "parser.y"
                {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1709 "parser.tab.c"
+#line 1697 "parser.tab.c"
     break;
 
   case 67: /* expr: '-' expr  */
 #line 262 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1715 "parser.tab.c"
+#line 1703 "parser.tab.c"
     break;
 
   case 68: /* expr: '!' expr  */
 #line 263 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1721 "parser.tab.c"
+#line 1709 "parser.tab.c"
     break;
 
   case 69: /* expr: '&' expr  */
 #line 264 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1727 "parser.tab.c"
+#line 1715 "parser.tab.c"
     break;
 
   case 70: /* expr: '*' expr  */
 #line 265 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1733 "parser.tab.c"
+#line 1721 "parser.tab.c"
     break;
 
   case 71: /* expr: '#' expr  */
 #line 266 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1739 "parser.tab.c"
+#line 1727 "parser.tab.c"
     break;
 
   case 72: /* expr: expr '+' expr  */
 #line 267 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1745 "parser.tab.c"
+#line 1733 "parser.tab.c"
     break;
 
   case 73: /* expr: expr '-' expr  */
 #line 268 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1751 "parser.tab.c"
+#line 1739 "parser.tab.c"
     break;
 
   case 74: /* expr: expr '*' expr  */
 #line 269 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1757 "parser.tab.c"
+#line 1745 "parser.tab.c"
     break;
 
   case 75: /* expr: expr '/' expr  */
 #line 270 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1763 "parser.tab.c"
+#line 1751 "parser.tab.c"
     break;
 
   case 76: /* expr: expr '%' expr  */
 #line 271 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1769 "parser.tab.c"
+#line 1757 "parser.tab.c"
     break;
 
   case 77: /* expr: expr '<' expr  */
 #line 272 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1775 "parser.tab.c"
+#line 1763 "parser.tab.c"
     break;
 
   case 78: /* expr: expr '>' expr  */
 #line 273 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1781 "parser.tab.c"
+#line 1769 "parser.tab.c"
     break;
 
   case 79: /* expr: expr '|' expr  */
 #line 274 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1787 "parser.tab.c"
+#line 1775 "parser.tab.c"
     break;
 
   case 80: /* expr: expr '&' expr  */
 #line 275 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1793 "parser.tab.c"
+#line 1781 "parser.tab.c"
     break;
 
   case 81: /* expr: expr '^' expr  */
 #line 276 "parser.y"
                     {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1799 "parser.tab.c"
+#line 1787 "parser.tab.c"
     break;
 
   case 82: /* expr: expr TK_OC_OR expr  */
 #line 277 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1805 "parser.tab.c"
+#line 1793 "parser.tab.c"
     break;
 
   case 83: /* expr: expr TK_OC_AND expr  */
 #line 278 "parser.y"
                           {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1811 "parser.tab.c"
+#line 1799 "parser.tab.c"
     break;
 
   case 84: /* expr: expr TK_OC_LE expr  */
 #line 279 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1817 "parser.tab.c"
+#line 1805 "parser.tab.c"
     break;
 
   case 85: /* expr: expr TK_OC_GE expr  */
 #line 280 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1823 "parser.tab.c"
+#line 1811 "parser.tab.c"
     break;
 
   case 86: /* expr: expr TK_OC_EQ expr  */
 #line 281 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1829 "parser.tab.c"
+#line 1817 "parser.tab.c"
     break;
 
   case 87: /* expr: expr TK_OC_NE expr  */
 #line 282 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-2].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1835 "parser.tab.c"
+#line 1823 "parser.tab.c"
     break;
 
   case 88: /* expr: expr '?' expr ':' expr  */
 #line 283 "parser.y"
                              {Nodo * data[2] = {(yyvsp[-4].nodo), (yyvsp[-2].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1841 "parser.tab.c"
+#line 1829 "parser.tab.c"
     break;
 
   case 89: /* expr_pr: expr expr_pr_lst  */
 #line 287 "parser.y"
                       {Nodo * data[2] = {(yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1847 "parser.tab.c"
+#line 1835 "parser.tab.c"
     break;
 
   case 90: /* expr_pr_lst: ',' expr expr_pr_lst  */
 #line 291 "parser.y"
                          {Nodo * data[2] = {(yyvsp[-1].nodo), (yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 2);}
-#line 1853 "parser.tab.c"
+#line 1841 "parser.tab.c"
     break;
 
   case 91: /* expr_pr_lst: %empty  */
 #line 292 "parser.y"
       { }
-#line 1859 "parser.tab.c"
+#line 1847 "parser.tab.c"
     break;
 
   case 92: /* lit: TK_LIT_INT  */
 #line 296 "parser.y"
                {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1865 "parser.tab.c"
+#line 1853 "parser.tab.c"
     break;
 
   case 93: /* lit: TK_LIT_FLOAT  */
 #line 297 "parser.y"
                     {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1871 "parser.tab.c"
+#line 1859 "parser.tab.c"
     break;
 
   case 94: /* lit: TK_LIT_FALSE  */
 #line 298 "parser.y"
                     {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1877 "parser.tab.c"
+#line 1865 "parser.tab.c"
     break;
 
   case 95: /* lit: TK_LIT_TRUE  */
 #line 299 "parser.y"
                    {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1883 "parser.tab.c"
+#line 1871 "parser.tab.c"
     break;
 
   case 96: /* lit: TK_LIT_CHAR  */
 #line 300 "parser.y"
                   {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1889 "parser.tab.c"
+#line 1877 "parser.tab.c"
     break;
 
   case 97: /* lit: TK_LIT_STRING  */
 #line 301 "parser.y"
                      {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1895 "parser.tab.c"
+#line 1883 "parser.tab.c"
     break;
 
   case 98: /* lit_num: TK_LIT_INT  */
 #line 305 "parser.y"
                {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1901 "parser.tab.c"
+#line 1889 "parser.tab.c"
     break;
 
   case 99: /* lit_num: TK_LIT_FLOAT  */
 #line 306 "parser.y"
                    {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1907 "parser.tab.c"
+#line 1895 "parser.tab.c"
     break;
 
   case 100: /* bool: TK_LIT_TRUE  */
 #line 310 "parser.y"
                 {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1913 "parser.tab.c"
+#line 1901 "parser.tab.c"
     break;
 
   case 101: /* bool: TK_LIT_FALSE  */
 #line 311 "parser.y"
                    {Nodo * data[1] = {(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data, 1);}
-#line 1919 "parser.tab.c"
+#line 1907 "parser.tab.c"
     break;
 
 
-#line 1923 "parser.tab.c"
+#line 1911 "parser.tab.c"
 
       default: break;
     }

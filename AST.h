@@ -10,7 +10,7 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 extern void *arvore;
 
-
+/*
 union LexVal {
 	int linha;
 	int tipo;
@@ -24,7 +24,7 @@ union Valor {
 	char* s;
 	bool b;
 } Valor;
-
+*/
 
 typedef struct Nodo {
 

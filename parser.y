@@ -78,7 +78,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 %type<nodo> programa
 %type<nodo> decl
-%type<nodo> varglobal
+//%type<nodo> varglobal
 %type<nodo> func
 %type<nodo> cabecalho
 %type<nodo> param
@@ -126,14 +126,14 @@ programa: decl {arvore = $$;}
     ;
     
 decl:
-    varglobal decl	{$$ = 0;} 
+    varglobal decl	{ }
     | func decl 	{Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
-    | 			{$$ = 0;}
+    | { }			
     ;
 
 varglobal:
-    tipo TK_IDENTIFICADOR lista {$$ = 0;}
-    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' {$$ = 0;}
+    tipo TK_IDENTIFICADOR lista 
+    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
     ;
     
 
