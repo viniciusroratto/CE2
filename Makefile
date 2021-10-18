@@ -6,6 +6,10 @@
 etapa3: ast parser scanner  main
 	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
 
+mac: ast parser scanner  main
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll
+	./etapa3
+
 
 parser:
 	bison -d parser.y 
@@ -25,6 +29,7 @@ report:
 	gcc -d parser.y --report=all -Wcounterexamples 
 	
 test:
+	make clean
 	gcc -c -g AST.h -Wall
 	bison -d parser.y 
 	gcc -c -g parser.tab.c -Wall
@@ -36,7 +41,7 @@ test:
 	
 	
 clean:
-	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o ast.o
+	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o ast.gch
 	
 run: etapa3
 	 ./etapa3

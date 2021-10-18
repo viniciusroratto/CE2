@@ -26,7 +26,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 %union{
 	struct LexVal *valor_lexico;
-    	struct Nodo * nodo;
+    struct Nodo * nodo;
 }
 
 %token<nodo> TK_PR_INT
@@ -48,7 +48,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 %token TK_PR_FOREACH
 %token<nodo>  TK_PR_FOR
 %token<nodo> TK_PR_SWITCH
-%token TK_PR_CASE
+%token<nodo> TK_PR_CASE
 %token<nodo> TK_PR_BREAK
 %token<nodo> TK_PR_CONTINUE
 %token TK_PR_CLASS
@@ -78,7 +78,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 %type<nodo> programa
 %type<nodo> decl
-//%type<nodo> varglobal
+%type<nodo> varglobal
 %type<nodo> func
 %type<nodo> cabecalho
 %type<nodo> param
@@ -122,7 +122,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $$;}
+programa: decl {$$ = $1; arvore = $$;}
     ;
     
 decl:
@@ -132,8 +132,8 @@ decl:
     ;
 
 varglobal:
-    tipo TK_IDENTIFICADOR lista 
-    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';'
+    tipo TK_IDENTIFICADOR lista {}
+    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' {}
     ;
     
 
