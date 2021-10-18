@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "AST.h"
+#include "parser.tab.h"
 #define YYERROR_VERBOSE 1
 
 
@@ -122,7 +123,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {$$ = $1; arvore = $$;}
+programa: decl {$$ = $1; arvore = $$; printf("DECL");}
     ;
     
 decl:
