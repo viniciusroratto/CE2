@@ -123,7 +123,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {$$ = $1; arvore = $$;}
+programa: decl {$$ = $1; arvore = $$; printf("DECL");}
     ;
     
 decl:
