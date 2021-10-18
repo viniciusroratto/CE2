@@ -8,14 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "AST.h"
-#include "parser.tab.h"
 #define YYERROR_VERBOSE 1
 
 
 int yylex(void);
 void yyerror (char const *s);
 int get_line_number();
-extern int yylval;  
+
 
 extern void *arvore;
 void exporta (void *arvore);
@@ -27,7 +26,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 %union{
 	struct LexVal *valor_lexico;
-    struct Nodo * nodo;
+    	struct Nodo * nodo;
 }
 
 %token<nodo> TK_PR_INT
@@ -49,7 +48,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 %token TK_PR_FOREACH
 %token<nodo>  TK_PR_FOR
 %token<nodo> TK_PR_SWITCH
-%token<nodo> TK_PR_CASE
+%token TK_PR_CASE
 %token<nodo> TK_PR_BREAK
 %token<nodo> TK_PR_CONTINUE
 %token TK_PR_CLASS
@@ -123,10 +122,10 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {$$ = $1; arvore = $$; printf("DECL");}
+programa: decl {arvore = $$;}
     ;
     
-decl:
+decl:./et
     varglobal decl	{ }
     | func decl 	{Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
     | { }			
