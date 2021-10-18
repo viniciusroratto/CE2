@@ -8,13 +8,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "AST.h"
+#include "parser.tab.h"
 #define YYERROR_VERBOSE 1
 
 
 int yylex(void);
 void yyerror (char const *s);
 int get_line_number();
-
+extern int yylval;  
 
 extern void *arvore;
 void exporta (void *arvore);
