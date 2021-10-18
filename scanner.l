@@ -13,6 +13,7 @@ int linha = 1;
 int get_line_number(void);
 union LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
+char* removequote(char * yytext); 
 
 %}
 
@@ -153,8 +154,8 @@ union LexVal *create_value (char* yytext, int type){
 	{
 		case TK_LIT_INT: newVal->val->i = atoi(yytext); 	break;
 		case TK_LIT_FLOAT: newVal->val->f = atof(yytext); 	break;
-		case TK_LIT_CHAR: newVal->val->c = *strdup(yytext); 	break; //retirar aspas.
-		case TK_LIT_STRING: newVal->val->s = strdup(yytext);	break; //retirar aspas.
+		case TK_LIT_CHAR: newVal->val->c = *strdup(removequote(yytext)); 	break;
+		case TK_LIT_STRING: newVal->val->s = strdup(removequote(yytext));	break;
 		case TK_LIT_TRUE: newVal->val->b = true; 	break;
 		case TK_LIT_FALSE: newVal->val->b = false; 	break;
 		default: 
@@ -164,5 +165,24 @@ union LexVal *create_value (char* yytext, int type){
 	return newVal;
 
 }
+
+
+char* removequote(char * yytext){
+
+	int j = 0;
+	int lineLength = strlen(yytext);
+	for (int i = 0; i < lineLength; i ++) {
+            if (yytext[i] != '"' && yytext[i] != '\\') { 
+                 yytext[j++] = yytext[i];
+            } else if (yytext[i+1] == '"' && yytext[i] == '\\') { 
+                 yytext[j++] = '"';
+            } else if (yytext[i+1] != '"' && yytext[i] == '\\') { 
+                 yytext[j++] = '\\';
+            }
+	}
+	yytext[j] = '\0';
+	return yytext;
+}
+
 
 #endif // SCANNER

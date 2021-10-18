@@ -4,7 +4,7 @@
 
 
 etapa3: ast parser scanner  main
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll -v
 
 
 parser:
@@ -25,15 +25,14 @@ report:
 	gcc -d parser.y --report=all -Wcounterexamples 
 	
 test:
-	make clean
 	gcc -c -g AST.h -Wall
 	bison -d parser.y 
 	gcc -c -g parser.tab.c -Wall
 	flex scanner.l
 	gcc -c -g lex.yy.c -Wall
 	gcc -c -g main.c -Wall
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
-	gdb ./etapa3
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll
+	sudo gdb ./etapa3
 	
 	
 clean:
