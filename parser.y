@@ -25,8 +25,8 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 %}
 
 %union{
-	union LexVal *valor_lexico;
-    struct Nodo * nodo;
+	struct LexVal *valor_lexico;
+    	struct Nodo * nodo;
 }
 
 %token<nodo> TK_PR_INT

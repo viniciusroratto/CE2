@@ -11,7 +11,7 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 int linha = 1;
 int get_line_number(void);
-union LexVal *create_value (char* yytext, int type);
+struct LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
 char* removequote(char * yytext); 
 
@@ -128,7 +128,7 @@ int get_line_number(void){
 }
 
 
-typedef union LexVal {
+typedef struct LexVal {
 	int linha;
 	int tipo;
  	union Valor *val;
@@ -143,14 +143,14 @@ typedef union Valor {
 } Valor;
 
 
-union LexVal *create_value (char* yytext, int type){
+struct LexVal *create_value (char* yytext, int type){
 
-	union LexVal * newVal = (union LexVal*)calloc(1, sizeof(union LexVal*));
-	newVal->val = (union Valor*)calloc(1, sizeof(union Valor*));
-	newVal->linha = get_line_number();
+	struct LexVal * newVal = (struct LexVal*)calloc(1, sizeof(LexVal*));
+	newVal->val = (union Valor*)calloc(1, sizeof(union Valor));
+	newVal->linha = linha;
 	newVal->tipo = type;
 	
-	switch (type)
+	switch (newVal->tipo)
 	{
 		case TK_LIT_INT: newVal->val->i = atoi(yytext); 	break;
 		case TK_LIT_FLOAT: newVal->val->f = atof(yytext); 	break;
@@ -171,7 +171,7 @@ char* removequote(char * yytext){
 
 	int j = 0;
 	int lineLength = strlen(yytext);
-	for (int i = 0; i < lineLength; i ++) {
+	for (int i = 0; i < lineLength;  i++) {
             if (yytext[i] != '"' && yytext[i] != '\\') { 
                  yytext[j++] = yytext[i];
             } else if (yytext[i+1] == '"' && yytext[i] == '\\') { 

@@ -1422,7 +1422,7 @@ yyreduce:
 
   case 3: /* decl: varglobal decl  */
 #line 129 "parser.y"
-                        { }
+                        { printf("TEST"); }
 #line 1427 "parser.tab.c"
     break;
 

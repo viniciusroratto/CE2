@@ -107,8 +107,8 @@ union YYSTYPE
 {
 #line 27 "parser.y"
 
-	union LexVal *valor_lexico;
-    struct Nodo * nodo;
+	struct LexVal *valor_lexico;
+    	struct Nodo * nodo;
 
 #line 114 "parser.tab.h"
 

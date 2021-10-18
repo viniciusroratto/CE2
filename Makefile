@@ -4,7 +4,7 @@
 
 
 etapa3: ast parser scanner  main
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll -v
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
 
 
 parser:
@@ -31,8 +31,8 @@ test:
 	flex scanner.l
 	gcc -c -g lex.yy.c -Wall
 	gcc -c -g main.c -Wall
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll
-	sudo gdb ./etapa3
+	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl -v
+	gdb ./etapa3
 	
 	
 clean:
