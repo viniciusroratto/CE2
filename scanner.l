@@ -49,7 +49,7 @@ REAL {INTEIRO}("."{INTEIRO})?{EXPONENCIAL}?
 "<<"                          { yylval.valor_lexico = create_value(yytext, TK_OC_SL);}
 
  /* Palavras reservadas*/
-int                          { yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
+int                          { printf("INT"); yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
 float                        { yylval.valor_lexico = create_value(yytext, TK_PR_FLOAT);}
 bool                         { yylval.valor_lexico = create_value(yytext, TK_PR_BOOL);}
 char                         { yylval.valor_lexico = create_value(yytext, TK_PR_CHAR);}
@@ -161,6 +161,7 @@ struct LexVal *create_value (char* yytext, int type){
 		default: 
 			newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
 			newVal->val->s = strdup(yytext);
+			printf("Default");
 			}	
 	return newVal;
 

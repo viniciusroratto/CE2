@@ -59,7 +59,7 @@ void libera (void *arvore);
 
 
 void imprime (void *arvore){
-	printf("Test");
+	//printf("Test");
 	//if (arvore != NULL){
 	//	imprime (arvore->children);
 //printf("%p [label=\"Linha\"] \n"); //imprime o endereço de memoria; 
@@ -70,7 +70,7 @@ void imprime (void *arvore){
 
 
 void exporta (void *arvore){
-	printf("Test");
+	//printf("Test");
 	/*FILE *file = fopen("saida", "w");
 	if (newthree != NULL){
 		//fprintf (file,"%p [label=\"Tipo\"] \n");
@@ -84,7 +84,7 @@ void exporta (void *arvore){
 
 void libera (void *arvore)
 {
-	printf("Test");
+	//printf("Test");
 	/*
 	if (arvore != NULL)
 	{	free(newthree);

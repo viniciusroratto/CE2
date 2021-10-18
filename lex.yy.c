@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -604,10 +604,10 @@ struct LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
 char* removequote(char * yytext); 
 
-#line 608 "lex.yy.c"
+#line 607 "lex.yy.c"
 
 /*como visto na aula N2A4.*/
-#line 611 "lex.yy.c"
+#line 610 "lex.yy.c"
 
 #define INITIAL 0
 #define comentario 1
@@ -829,7 +829,7 @@ YY_DECL
 
 #line 29 "scanner.l"
  /* BRANCO { }  Nao fazer nada se espaço em branco ou tab. */
-#line 833 "lex.yy.c"
+#line 832 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -974,7 +974,7 @@ YY_RULE_SETUP
 case 17:
 YY_RULE_SETUP
 #line 53 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
+{ printf("INT"); yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
@@ -1272,7 +1272,7 @@ YY_RULE_SETUP
 #line 123 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 1276 "lex.yy.c"
+#line 1275 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(comentario):
 	yyterminate();
@@ -2321,6 +2321,7 @@ struct LexVal *create_value (char* yytext, int type){
 		default: 
 			newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
 			newVal->val->s = strdup(yytext);
+			printf("Default");
 			}	
 	return newVal;
 

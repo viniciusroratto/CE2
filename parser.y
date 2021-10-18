@@ -122,17 +122,17 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $$;}
+programa: decl {arvore = $$; printf("DECL");}
     ;
     
-decl:./et
+decl:
     varglobal decl	{ }
     | func decl 	{Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
     | { }			
     ;
 
 varglobal:
-    tipo TK_IDENTIFICADOR lista {}
+    tipo TK_IDENTIFICADOR lista { printf("VARGLOBAL");}
     | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' {}
     ;
     
