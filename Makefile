@@ -1,5 +1,5 @@
   # GRUPO F
-  # Nomes - Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (00160094)
+  # Nomes: Vinícius Roratto Carvalho (00160094)
   # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
 
 

@@ -1416,19 +1416,19 @@ yyreduce:
     {
   case 2: /* programa: decl  */
 #line 125 "parser.y"
-               {arvore = (yyval.nodo); printf("DECL");}
+               {arvore = (yyval.nodo); printf("DECL\n");}
 #line 1421 "parser.tab.c"
     break;
 
   case 3: /* decl: varglobal decl  */
 #line 129 "parser.y"
-                        { }
+                        { printf("VARGLOBAL\n"); }
 #line 1427 "parser.tab.c"
     break;
 
   case 4: /* decl: func decl  */
 #line 130 "parser.y"
-                        {Nodo * data[2] = {(yyvsp[-1].nodo),(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
+                        {printf("FUNC"); Nodo * data[2] = {(yyvsp[-1].nodo),(yyvsp[0].nodo)}; (yyval.nodo) = criaNodo(data,2);}
 #line 1433 "parser.tab.c"
     break;
 
@@ -1440,7 +1440,7 @@ yyreduce:
 
   case 6: /* varglobal: tipo TK_IDENTIFICADOR lista  */
 #line 135 "parser.y"
-                                { printf("VARGLOBAL");}
+                                { }
 #line 1445 "parser.tab.c"
     break;
 

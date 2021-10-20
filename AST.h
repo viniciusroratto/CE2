@@ -1,5 +1,5 @@
 /* GRUPO F
-Nomes: Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (160094)
+Nomes: Vinícius Roratto Carvalho (160094)
 Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 */
 
@@ -10,22 +10,6 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 
 extern void *arvore;
 
-/*
-union LexVal {
-	int linha;
-	int tipo;
- 	union Valor *val;
-} LexVal;
-
-union Valor {
-	int i;
-	float f;
-	char c;
-	char* s;
-	bool b;
-} Valor;
-*/
-
 typedef struct Nodo {
 
  	struct Nodo * children;
@@ -35,6 +19,7 @@ typedef struct Nodo {
 
 Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 	primeiro = data[n]; n++;
+	printf("IRMAO AST\n");
 	if (n <= irmaos){
 		primeiro->sibling = criaIrmao (primeiro->sibling, irmaos, data, n);
 	}
@@ -44,9 +29,12 @@ Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 Nodo * criaNodo (Nodo * data[], int filhos){
     int n = 0;
 	Nodo * novo = (Nodo*) calloc(1, sizeof(Nodo));
+	printf("AST\n");
 	if (filhos > 0){
+		printf("FILHO\n");
 		novo->children = data[n]; n++;
 		if (filhos > 1){
+				printf("FILHO\n");
 				novo->children->sibling = criaIrmao (novo->children->sibling, filhos, data, n);
 		}
 	}
@@ -87,9 +75,11 @@ void libera (void *arvore)
 	//printf("Test");
 	/*
 	if (arvore != NULL)
-	{	free(newthree);
+	{	
 		libera(newthree->children);
+		free(newthree);
 		libera(newthree->sibling);
+		free(newthree);
 	} */
 
 }

@@ -1,5 +1,5 @@
-/*  # GRUPO F
-  # Nomes - Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (160094)
+/*  # GRUPO Y
+  # Nomes:  Vinícius Roratto Carvalho (160094)
   # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
 */
 
@@ -26,7 +26,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 %union{
 	struct LexVal *valor_lexico;
-    	struct Nodo * nodo;
+    struct Nodo * nodo;
 }
 
 %token<nodo> TK_PR_INT
@@ -45,18 +45,18 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 %token<nodo> TK_PR_RETURN
 %token<nodo>  TK_PR_CONST
 %token<nodo>  TK_PR_STATIC
-%token TK_PR_FOREACH
+%token<nodo> TK_PR_FOREACH
 %token<nodo>  TK_PR_FOR
 %token<nodo> TK_PR_SWITCH
-%token TK_PR_CASE
+%token<nodo> TK_PR_CASE
 %token<nodo> TK_PR_BREAK
 %token<nodo> TK_PR_CONTINUE
-%token TK_PR_CLASS
-%token TK_PR_PRIVATE
-%token TK_PR_PUBLIC
-%token TK_PR_PROTECTED
-%token TK_PR_END
-%token TK_PR_DEFAULT
+%token<nodo> TK_PR_CLASS
+%token<nodo> TK_PR_PRIVATE
+%token<nodo> TK_PR_PUBLIC
+%token<nodo> TK_PR_PROTECTED
+%token<nodo> TK_PR_END
+%token<nodo> TK_PR_DEFAULT
 
 %token<nodo>  TK_OC_LE
 %token<nodo>  TK_OC_GE
@@ -83,11 +83,11 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 %type<nodo> cabecalho
 %type<nodo> param
 %type<nodo> lista_parametros
-//%type<nodo> const
+
 %type<nodo> corpo
 %type<nodo> comando
 %type<nodo> varlocal
-//%type<nodo> tipo2
+
 %type<nodo> lista_varlocal
 %type<nodo> saida
 %type<nodo> shift
@@ -122,17 +122,17 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $$; printf("DECL");}
+programa: decl {arvore = $$; printf("DECL\n");}
     ;
     
 decl:
-    varglobal decl	{ }
-    | func decl 	{Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
+    varglobal decl	{ printf("VARGLOBAL\n"); }
+    | func decl 	{printf("FUNC"); Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
     | { }			
     ;
 
 varglobal:
-    tipo TK_IDENTIFICADOR lista { printf("VARGLOBAL");}
+    tipo TK_IDENTIFICADOR lista { }
     | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' {}
     ;
     

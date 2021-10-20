@@ -1,5 +1,5 @@
-/* GRUPO F
-Nomes: Tatiana Pacheco de Almeida (252561) - Vinícius Roratto Carvalho (160094)
+/* GRUPO Y
+Nomes: Vinícius Roratto Carvalho (160094)
 Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr  
 */
 
@@ -14,6 +14,8 @@ int get_line_number(void);
 struct LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
 char* removequote(char * yytext); 
+
+int _ESPECIAL = 666;
 
 %}
 
@@ -49,7 +51,7 @@ REAL {INTEIRO}("."{INTEIRO})?{EXPONENCIAL}?
 "<<"                          { yylval.valor_lexico = create_value(yytext, TK_OC_SL);}
 
  /* Palavras reservadas*/
-int                          { printf("INT"); yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
+int                          { yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
 float                        { yylval.valor_lexico = create_value(yytext, TK_PR_FLOAT);}
 bool                         { yylval.valor_lexico = create_value(yytext, TK_PR_BOOL);}
 char                         { yylval.valor_lexico = create_value(yytext, TK_PR_CHAR);}
@@ -77,31 +79,31 @@ protected                    { yylval.valor_lexico = create_value(yytext, TK_PR_
 
  /* Caracteres Especiais */
 
-","                          { return yytext[0]; }
-";"                          { return yytext[0]; }
-":"                          { return yytext[0]; }
-"("                          { return yytext[0]; }
-")"                          { return yytext[0]; }
-"["                          { return yytext[0]; }
-"]"                          { return yytext[0]; }
-"{"                          { return yytext[0]; }
-"}"                          { return yytext[0]; }
-"+"                          { return yytext[0]; }
-"-"                          { return yytext[0]; }
-"|"                          { return yytext[0]; }
-"*"                          { return yytext[0]; }
-"/"                          { return yytext[0]; }
-"<"                          { return yytext[0]; }
-">"                          { return yytext[0]; }
-"="                          { return yytext[0]; }
-"!"                          { return yytext[0]; }
-"&"                          { return yytext[0]; }
-"%"                          { return yytext[0]; }
-"#"                          { return yytext[0]; }
-"^"                          { return yytext[0]; }
-"."                          { return yytext[0]; }
-"$"                          { return yytext[0]; }
-"?"                          { return yytext[0]; }
+","							 {yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+";"                        	 { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+":"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"("                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+")"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"["                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"]"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"{"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"}"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"+"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"-"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"|"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"*"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"/"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"<"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+">"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"="                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"!"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"&"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"%"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"#"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"^"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"."                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"$"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+"?"                          { yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
 
  /* Literais */
 false                         { yylval.valor_lexico = create_value(yytext, TK_LIT_FALSE);}
@@ -114,7 +116,7 @@ true                          { yylval.valor_lexico = create_value(yytext, TK_LI
 \"[^\"]*\"                    { yylval.valor_lexico = create_value(yytext, TK_LIT_STRING);}
 
  /*Identificador*/
-[a-zA-Z_]+[a-zA-Z0-9_]*       { yylval.valor_lexico = create_value(yytext, TK_IDENTIFICADOR); return TK_IDENTIFICADOR; }
+[a-zA-Z_]+[a-zA-Z0-9_]*       { yylval.valor_lexico = create_value(yytext, TK_IDENTIFICADOR);}
 
  /*Identificador de Erros - tudo que ele nao reconhece retorna erro*/
 .                             {return TOKEN_ERRO;}
@@ -152,7 +154,7 @@ struct LexVal *create_value (char* yytext, int type){
 	
 	switch (newVal->tipo)
 	{
-		case TK_LIT_INT: newVal->val->i = atoi(yytext); 	break;
+		case TK_LIT_INT: newVal->val->i = atoi(yytext); printf("INT");	break;
 		case TK_LIT_FLOAT: newVal->val->f = atof(yytext); 	break;
 		case TK_LIT_CHAR: newVal->val->c = *strdup(removequote(yytext)); 	break;
 		case TK_LIT_STRING: newVal->val->s = strdup(removequote(yytext));	break;
@@ -161,7 +163,6 @@ struct LexVal *create_value (char* yytext, int type){
 		default: 
 			newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
 			newVal->val->s = strdup(yytext);
-			printf("Default");
 			}	
 	return newVal;
 
