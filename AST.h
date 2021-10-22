@@ -20,10 +20,15 @@ typedef struct Nodo {
 Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 	primeiro = data[n]; n++;
 	printf("IRMAO AST\n");
-	if (n <= irmaos){
+	if (n >= irmaos){
+		primeiro->sibling = (Nodo*) calloc(1, sizeof(Nodo));
 		primeiro->sibling = criaIrmao (primeiro->sibling, irmaos, data, n);
+		return primeiro;
 	}
-	return primeiro;
+	else{
+		return NULL;
+	}
+	;
 }
 
 Nodo * criaNodo (Nodo * data[], int filhos){
@@ -32,9 +37,9 @@ Nodo * criaNodo (Nodo * data[], int filhos){
 	printf("AST\n");
 	if (filhos > 0){
 		printf("FILHO\n");
+		novo->children = (Nodo*) calloc(1, sizeof(Nodo));
 		novo->children = data[n]; n++;
 		if (filhos > 1){
-				printf("FILHO\n");
 				novo->children->sibling = criaIrmao (novo->children->sibling, filhos, data, n);
 		}
 	}
