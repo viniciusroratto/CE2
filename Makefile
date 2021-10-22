@@ -6,7 +6,7 @@
 etapa3: ast parser scanner  main
 	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
 
-mac: ast parser scanner  main
+mac: ast parser scanner main
 	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll
 	./etapa3
 

@@ -594,7 +594,6 @@ Nomes: Vinícius Roratto Carvalho (160094)
 Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr  
 */
 #line 8 "scanner.l"
-#ifndef SCANNER
 #include "parser.tab.h"
 #include <stdbool.h>
 
@@ -604,12 +603,14 @@ struct LexVal *create_value (char* yytext, int type);
 bool stob (char* yytext);
 char* removequote(char * yytext); 
 
-int _ESPECIAL = 666;
+int _ESPECIAL = 1;
+int _COMPOSTOS = 2;
+int _RESERVADAS = 3;
 
-#line 609 "lex.yy.c"
+#line 610 "lex.yy.c"
 
 /*como visto na aula N2A4.*/
-#line 612 "lex.yy.c"
+#line 613 "lex.yy.c"
 
 #define INITIAL 0
 #define comentario 1
@@ -827,11 +828,11 @@ YY_DECL
 		}
 
 	{
-#line 29 "scanner.l"
+#line 30 "scanner.l"
 
-#line 31 "scanner.l"
+#line 32 "scanner.l"
  /* BRANCO { }  Nao fazer nada se espaço em branco ou tab. */
-#line 834 "lex.yy.c"
+#line 835 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -890,391 +891,391 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 32 "scanner.l"
+#line 33 "scanner.l"
 
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 33 "scanner.l"
+#line 34 "scanner.l"
 {linha++;} /* incrementa linha */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 34 "scanner.l"
+#line 35 "scanner.l"
 { } /* ignora comentários de linha simples. */
 	YY_BREAK
 /* fonte para comentário de linhas múltiplas -> http:\//dinosaur.compilertools.net/flex/manpage.html */
 case 4:
 YY_RULE_SETUP
-#line 37 "scanner.l"
+#line 38 "scanner.l"
 BEGIN(comentario);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 38 "scanner.l"
+#line 39 "scanner.l"
 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 39 "scanner.l"
+#line 40 "scanner.l"
 
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 40 "scanner.l"
+#line 41 "scanner.l"
 ++linha;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 41 "scanner.l"
+#line 42 "scanner.l"
 BEGIN(INITIAL);
 	YY_BREAK
 /*Operadores Compostos*/
 case 9:
 YY_RULE_SETUP
-#line 45 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_LE);}
+#line 46 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_LE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 46 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_GE);}
+#line 47 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_GE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 47 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_EQ);}
+#line 48 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_EQ;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 48 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_NE);}
+#line 49 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_NE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 49 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_AND);}
+#line 50 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_AND;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 50 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_OR);}
+#line 51 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_OR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 51 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_SR);}
+#line 52 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_SL;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 52 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_OC_SL);}
+#line 53 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _COMPOSTOS); return TK_OC_SR;}
 	YY_BREAK
 /* Palavras reservadas*/
 case 17:
 YY_RULE_SETUP
-#line 55 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_INT);}
+#line 56 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_INT;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 56 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_FLOAT);}
+#line 57 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_FLOAT;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 57 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_BOOL);}
+#line 58 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_BOOL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 58 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_CHAR);}
+#line 59 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_CHAR;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 59 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_STRING);}
+#line 60 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_STRING;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 60 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_IF);}
+#line 61 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_IF;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 61 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_THEN);}
+#line 62 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_THEN;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 62 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_ELSE);}
+#line 63 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_ELSE;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 63 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_WHILE);}
+#line 64 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_WHILE;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 64 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_DO);}
+#line 65 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_DO;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 65 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_INPUT);}
+#line 66 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_INPUT;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 66 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_OUTPUT);}
+#line 67 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_OUTPUT;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 67 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_RETURN);}
+#line 68 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_RETURN;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 68 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_CONST);}
+#line 69 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_CONST;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 69 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_STATIC);}
+#line 70 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_STATIC;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 70 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_FOREACH);}
+#line 71 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_FOREACH;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 71 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_FOR);}
+#line 72 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_FOR;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 72 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_SWITCH);}
+#line 73 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_SWITCH;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 73 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_CASE);}
+#line 74 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_CASE;} 
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 74 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_BREAK);}
+#line 75 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_BREAK;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 75 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_CONTINUE);}
+#line 76 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_CONTINUE;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 76 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_CLASS);}
+#line 77 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_CLASS;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 77 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_PRIVATE);}
+#line 78 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_PRIVATE;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 78 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_PUBLIC);}
+#line 79 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_PUBLIC;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 79 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_PR_PROTECTED);}
+#line 80 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _RESERVADAS); return TK_PR_PROTECTED;}
 	YY_BREAK
 /* Caracteres Especiais */
 case 42:
 YY_RULE_SETUP
-#line 83 "scanner.l"
-{yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 84 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 84 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 85 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 86 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "scanner.l"
-{ printf("("); yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 87 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "scanner.l"
-{ printf(")"); yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 88 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 88 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 89 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 89 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 90 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 90 "scanner.l"
-{ printf("{");yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 91 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "scanner.l"
-{ printf("}");yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 92 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 92 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 93 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 93 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 94 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 94 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 95 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 95 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 96 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 96 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 97 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 97 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 98 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 98 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 99 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 99 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 100 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 100 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 101 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 101 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 102 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 102 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 103 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 103 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 104 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 104 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 105 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 105 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 106 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 106 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 107 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 107 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); }
+#line 108 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, _ESPECIAL); return yytext[0];}
 	YY_BREAK
 /* Literais */
 case 67:
 YY_RULE_SETUP
-#line 110 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_FALSE);}
+#line 111 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_FALSE); return TK_LIT_FALSE; }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 111 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_TRUE);}
+#line 112 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_TRUE); return TK_LIT_TRUE;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 113 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_INT);}
+#line 114 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_INT); return TK_LIT_INT;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 114 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_FLOAT);}
+#line 115 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_FLOAT); return TK_LIT_FLOAT;}
 	YY_BREAK
 case 71:
 /* rule 71 can match eol */
 YY_RULE_SETUP
-#line 116 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_CHAR);}
+#line 117 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_CHAR); return TK_LIT_CHAR;}
 	YY_BREAK
 case 72:
 /* rule 72 can match eol */
 YY_RULE_SETUP
-#line 117 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_LIT_STRING);}
+#line 118 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_LIT_STRING); return TK_LIT_STRING;}
 	YY_BREAK
 /*Identificador*/
 case 73:
 YY_RULE_SETUP
-#line 120 "scanner.l"
-{ yylval.valor_lexico = create_value(yytext, TK_IDENTIFICADOR);}
+#line 121 "scanner.l"
+{ yylval.valor_lexico = create_value(yytext, TK_IDENTIFICADOR); return TK_IDENTIFICADOR;}
 	YY_BREAK
 /*Identificador de Erros - tudo que ele nao reconhece retorna erro*/
 case 74:
 YY_RULE_SETUP
-#line 123 "scanner.l"
-{return TOKEN_ERRO;}
+#line 124 "scanner.l"
+{return TOKEN_ERRO; printf("ERRO");}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 125 "scanner.l"
+#line 126 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 1277 "lex.yy.c"
+#line 1278 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(comentario):
 	yyterminate();
@@ -2280,7 +2281,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 125 "scanner.l"
+#line 126 "scanner.l"
 
     
     
@@ -2314,18 +2315,17 @@ struct LexVal *create_value (char* yytext, int type){
 	
 	switch (newVal->tipo)
 	{
-		case TK_LIT_INT: newVal->val->i = atoi(yytext); printf("INT");	break;
+		case TK_LIT_INT: newVal->val->i = atoi(yytext);	break;
 		case TK_LIT_FLOAT: newVal->val->f = atof(yytext); 	break;
 		case TK_LIT_CHAR: newVal->val->c = *strdup(removequote(yytext)); 	break;
 		case TK_LIT_STRING: newVal->val->s = strdup(removequote(yytext));	break;
 		case TK_LIT_TRUE: newVal->val->b = true; 	break;
 		case TK_LIT_FALSE: newVal->val->b = false; 	break;
 		default: 
-			newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
+			//newVal->val->s = (char *)calloc(strlen(yytext)+1,sizeof(char));
 			newVal->val->s = strdup(yytext);
 			}	
 	return newVal;
-
 }
 
 
@@ -2345,7 +2345,4 @@ char* removequote(char * yytext){
 	yytext[j] = '\0';
 	return yytext;
 }
-
-
-#endif // SCANNER
 

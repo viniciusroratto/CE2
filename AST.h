@@ -47,40 +47,41 @@ void libera (void *arvore);
 
 
 void imprime (void *arvore){
-	//printf("Test");
-	//if (arvore != NULL){
-	//	imprime (arvore->children);
-//printf("%p [label=\"Linha\"] \n"); //imprime o endereço de memoria; 
-	//	imprime (arvore->sibling);
-//printf("%p [label=\"Tipo\"] \n");
-	//}
+	printf("Printing\n");
+	Nodo * arv = arvore;
+	if (arvore != NULL){
+		imprime (arv->children);
+		printf("%p [label=\"%s\"] \n", arv, arv); //imprime o endereço de memoria; 
+		imprime (arv->sibling);
+		printf("%p [label=\"Tipo\"] \n");
+	}
 }
 
 
 void exporta (void *arvore){
-	//printf("Test");
-	/*FILE *file = fopen("saida", "w");
+	printf("Exporting\n");
+	Nodo * newthree = arvore;
+	FILE *file = fopen("saida.txt", "wa");
 	if (newthree != NULL){
-		//fprintf (file,"%p [label=\"Tipo\"] \n");
+		fprintf (file,"%p [label=\"%s\"] \n", newthree, newthree);
 		exporta (newthree->children);
-		//fprintf (file,"%p [label=\"Linha\"] \n"); //imprime o endereço de memoria;
+		printf (file,"%p [label=\"%s\"] \n", newthree, newthree); //imprime o endereço de memoria;
 		exporta (newthree->sibling); 
 		}
-	fclose (file); */
+	fclose (file); 
 }
 
 
 void libera (void *arvore)
 {
-	//printf("Test");
-	/*
-	if (arvore != NULL)
+	Nodo * arv = arvore; 
+	if (arv != NULL)
 	{	
-		libera(newthree->children);
-		free(newthree);
-		libera(newthree->sibling);
-		free(newthree);
-	} */
+		libera(arv->children);
+		free(arv);
+		libera(arv->sibling);
+		free(arv);
+	} 
 
 }
 

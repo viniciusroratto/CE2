@@ -4,7 +4,6 @@
 */
 
 %{
-#ifndef PARSER
 #include <stdio.h>
 #include <stdlib.h>
 #include "AST.h"
@@ -20,7 +19,6 @@ extern void *arvore;
 void exporta (void *arvore);
 void libera (void *arvore);
 Nodo * criaNodo (Nodo * data[], int filhos);
-
 
 %}
 
@@ -122,7 +120,7 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $$; printf("DECL\n");}
+programa: decl {arvore = $$; printf("DECL\n"); imprime($$);}
     ;
     
 decl:
@@ -133,7 +131,7 @@ decl:
 
 varglobal:
     tipo TK_IDENTIFICADOR lista { }
-    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' {}
+    | tipo TK_IDENTIFICADOR '[' TK_LIT_INT ']' ';' { }
     ;
     
 
@@ -160,7 +158,7 @@ lista:
 /* Definicao de funcoes */
 
 func:
-    cabecalho corpo {Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
+    cabecalho corpo {Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2); printf("CAB + CORPO");  }
 	;
 
 cabecalho:
@@ -316,5 +314,3 @@ bool:
 void yyerror(char const *s){
     fprintf(stderr, "Erro Encontrado: %s na linha %d \n", s, get_line_number());
 }
-    
-#endif // PARSER
