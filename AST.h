@@ -1,4 +1,4 @@
-/* GRUPO F
+/* GRUPO Y
 Nomes: Vinícius Roratto Carvalho (160094)
 Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 */
@@ -18,29 +18,35 @@ typedef struct Nodo {
 } Nodo; 
 
 Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
+	
 	primeiro = data[n]; n++;
-	printf("IRMAO AST\n");
-	if (n >= irmaos){
+	primeiro->sibling = NULL;
+	primeiro->children = NULL;
+
+	if (n != irmaos){
 		primeiro->sibling = (Nodo*) calloc(1, sizeof(Nodo));
 		primeiro->sibling = criaIrmao (primeiro->sibling, irmaos, data, n);
 		return primeiro;
 	}
 	else{
-		return NULL;
+		return primeiro;
 	}
 	;
 }
 
 Nodo * criaNodo (Nodo * data[], int filhos){
     int n = 0;
-	Nodo * novo = (Nodo*) calloc(1, sizeof(Nodo));
-	printf("AST\n");
+	Nodo* novo = (Nodo*) calloc(1, sizeof(Nodo));
+	novo->children = NULL;
+	novo->sibling = NULL;
+	//printf("AST\n");
 	if (filhos > 0){
-		printf("FILHO\n");
-		novo->children = (Nodo*) calloc(1, sizeof(Nodo));
+		//printf("FILHO\n");
 		novo->children = data[n]; n++;
+		novo->children->children = NULL;
+		novo->children->sibling = NULL;
 		if (filhos > 1){
-				novo->children->sibling = criaIrmao (novo->children->sibling, filhos, data, n);
+			novo->children->sibling = criaIrmao (novo->children->sibling, filhos, data, n);
 		}
 	}
 	return novo;
@@ -52,19 +58,19 @@ void libera (void *arvore);
 
 
 void imprime (void *arvore){
-	printf("Printing\n");
+
 	Nodo * arv = arvore;
-	if (arvore != NULL){
+	if (arv != NULL){
+		//printf("PRINT\n");
 		imprime (arv->children);
-		printf("%p [label=\"%s\"] \n", arv, arv); //imprime o endereço de memoria; 
+		printf("%p [label=\"%p\"] \n", arv, arv); //imprime o endereço de memoria; 
 		imprime (arv->sibling);
-		printf("%p [label=\"Tipo\"] \n");
 	}
 }
 
 
 void exporta (void *arvore){
-	printf("Exporting\n");
+	//printf("Exporting\n");
 	Nodo * newthree = arvore;
 	FILE *file = fopen("saida.txt", "wa");
 	if (newthree != NULL){
@@ -83,7 +89,6 @@ void libera (void *arvore)
 	if (arv != NULL)
 	{	
 		libera(arv->children);
-		free(arv);
 		libera(arv->sibling);
 		free(arv);
 	} 

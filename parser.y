@@ -18,7 +18,6 @@ int get_line_number();
 extern void *arvore;
 void exporta (void *arvore);
 void libera (void *arvore);
-Nodo * criaNodo (Nodo * data[], int filhos);
 
 %}
 
@@ -120,12 +119,12 @@ Nodo * criaNodo (Nodo * data[], int filhos);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $$; printf("DECL\n"); imprime($$);}
+programa: decl {arvore = $1;}
     ;
     
 decl:
-    varglobal decl	{ printf("VARGLOBAL\n"); }
-    | func decl 	{printf("FUNC"); Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
+    varglobal decl	{ }
+    | func decl 	{ Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2);}  
     | { }			
     ;
 
@@ -158,7 +157,7 @@ lista:
 /* Definicao de funcoes */
 
 func:
-    cabecalho corpo {Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2); printf("CAB + CORPO");  }
+    cabecalho corpo ';' {Nodo * data[2] = {$1,$2}; $$ = criaNodo(data,2); }
 	;
 
 cabecalho:
@@ -182,6 +181,7 @@ const:
         
 corpo:
     '{' comando '}' {Nodo * data[1] = {$2}; $$ = criaNodo(data,1);} 
+    | { }
     ;
     
 /* Bloco de comandos */

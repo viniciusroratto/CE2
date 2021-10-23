@@ -20,7 +20,7 @@ scanner:
 	gcc -c lex.yy.c
 	
 ast:
-	gcc -c AST.h
+	gcc -c AST.c
 	
 main:
 	gcc -c main.c
@@ -30,7 +30,7 @@ report:
 	
 test:
 	make clean
-	gcc -c -g AST.h -Wall
+	gcc -c -g AST.c -Wall
 	bison -d parser.y 
 	gcc -c -g parser.tab.c -Wall
 	flex scanner.l
@@ -41,12 +41,12 @@ test:
 	
 	
 clean:
-	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o ast.gch
+	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o AST.o
 	
 run: etapa3
 	 ./etapa3
 	 
 zip:
-	tar -cvzf etapa3.tgz scanner.l main.c parser.y Makefile AST.h
+	tar -cvzf etapa3.tgz scanner.l main.c parser.y Makefile AST.c AST.h
 
 
