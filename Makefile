@@ -4,10 +4,10 @@
 
 
 etapa4: ast parser scanner  main
-	gcc lex.yy.o parser.tab.o main.o -o etapa4 -lfl
+	gcc AST.o lex.yy.o parser.tab.o main.o -o etapa4 -lfl
 
 mac: ast parser scanner main
-	gcc lex.yy.o parser.tab.o main.o -o etapa4 -ll
+	gcc AST.o lex.yy.o parser.tab.o main.o -o etapa4 -ll
 	./etapa3
 
 
@@ -29,6 +29,7 @@ report:
 	gcc -d parser.y --report=all -Wcounterexamples 
 	
 test:
+	clear
 	make clean
 	gcc -c -g AST.c -Wall
 	bison -d parser.y 
@@ -36,8 +37,8 @@ test:
 	flex scanner.l
 	gcc -c -g lex.yy.c -Wall
 	gcc -c -g main.c -Wall
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl -v
-	gdb ./etapa3
+	gcc AST.o lex.yy.o parser.tab.o main.o -o etapa4 -lfl -v
+	gdb ./etapa4
 	
 	
 clean:

@@ -119,7 +119,7 @@ void libera (void *arvore);
 
 /* Declaracao de variaveis */
 
-programa: decl {arvore = $1;}
+programa: decl {arvore = $1; imprime(arvore);}
     ;
     
 decl:

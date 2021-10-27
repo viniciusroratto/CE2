@@ -7,24 +7,17 @@ Disciplina: INF01147 - Compiladores - Prof. Lucas Schnorr
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "AST.h"
 
-extern void *arvore;
-
-typedef struct Nodo {
-
- 	struct Nodo * children;
- 	struct Nodo * sibling;
- 	
-} Nodo; 
 
 Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 	
 	primeiro = data[n]; n++;
-	primeiro->sibling = NULL;
-	primeiro->children = NULL;
 
 	if (n != irmaos){
 		primeiro->sibling = (Nodo*) calloc(1, sizeof(Nodo));
+		primeiro->sibling = NULL;
+		primeiro->children = NULL;
 		primeiro->sibling = criaIrmao (primeiro->sibling, irmaos, data, n);
 		return primeiro;
 	}
@@ -35,13 +28,14 @@ Nodo * criaIrmao(Nodo * primeiro, int irmaos,  Nodo * data[], int n){
 }
 
 Nodo * criaNodo (Nodo * data[], int filhos){
-    int n = 0;
+    	int n = 0;
 	Nodo* novo = (Nodo*) calloc(1, sizeof(Nodo));
 	novo->children = NULL;
 	novo->sibling = NULL;
 	//printf("AST\n");
 	if (filhos > 0){
 		//printf("FILHO\n");
+		
 		novo->children = data[n]; n++;
 		novo->children->children = NULL;
 		novo->children->sibling = NULL;
@@ -71,12 +65,14 @@ void imprime (void *arvore){
 
 void exporta (void *arvore){
 	//printf("Exporting\n");
-	Nodo * newthree = arvore;
+	struct Nodo * newthree = arvore;
 	FILE *file = fopen("saida.txt", "wa");
-	if (newthree != NULL){
-		fprintf (file,"%p [label=\"%s\"] \n", newthree, newthree);
+	//printf("Nodo %p | filho: ",newthree, newthree->children);
+	
+	if (newthree != 0x0){
+		//fprintf (file,"%p [label=\"%s\"] \n", newthree, newthree);
 		exporta (newthree->children);
-		printf (file,"%p [label=\"%s\"] \n", newthree, newthree); //imprime o endereço de memoria;
+		printf (file,"%p [label=\"%s\"] \n", newthree, newthree);
 		exporta (newthree->sibling); 
 		}
 	fclose (file); 
