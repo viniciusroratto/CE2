@@ -3,11 +3,11 @@
   # disciplina - INF01147 - Compiladores - Prof. Lucas Schnorr
 
 
-etapa3: ast parser scanner  main
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -lfl
+etapa4: ast parser scanner  main
+	gcc lex.yy.o parser.tab.o main.o -o etapa4 -lfl
 
 mac: ast parser scanner main
-	gcc lex.yy.o parser.tab.o main.o -o etapa3 -ll
+	gcc lex.yy.o parser.tab.o main.o -o etapa4 -ll
 	./etapa3
 
 
@@ -41,12 +41,12 @@ test:
 	
 	
 clean:
-	rm etapa3 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o AST.o
+	rm etapa4 -f lex.yy.c lex.yy.o main.o parser.tab.c parser.tab.o AST.o
 	
-run: etapa3
-	 ./etapa3
+run: etapa4
+	 ./etapa4
 	 
 zip:
-	tar -cvzf etapa3.tgz scanner.l main.c parser.y Makefile AST.c AST.h
+	tar -cvzf etapa4.tgz scanner.l main.c parser.y Makefile AST.c AST.h hash.c
 
 
